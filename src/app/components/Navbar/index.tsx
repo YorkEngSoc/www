@@ -9,7 +9,7 @@ import "./index.css";
 export default function Navbar() {
   const pathName = usePathname();
   return (
-    <nav className="w-full sticky top-0 backdrop-blur-md px-10 py-2 grid grid-cols-3 items-center">
+    <nav className="w-full sticky top-0 backdrop-blur-md px-10 py-2 grid grid-cols-3 items-center z-[500]">
       <Link href="/">
         <Image src={logo} alt="York Engineering Society Logo" />
       </Link>
