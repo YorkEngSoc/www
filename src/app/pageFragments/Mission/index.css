@@ -1,0 +1,56 @@
+.bubble-top-left {
+  animation: bubble-top-left 20s linear infinite;
+}
+
+@keyframes bubble-top-left {
+    0% {
+        transform: translate(0%, 0%);
+    }
+    25% {
+        transform: translate(10%, -10%);
+    }
+    50% {
+        transform: translate(-10%, 10%);
+    }
+    100% {
+        transform: translate(0%, 0%);
+    }
+}
+
+.bubble-middle {
+    animation: bubble-middle 20s linear infinite;
+  }
+  
+  @keyframes bubble-middle {
+      0% {
+          transform: translate(0%, 0%);
+      }
+      25% {
+          transform: translate(-10%, 10%);
+      }
+      50% {
+          transform: translate(15%, -10%);
+      }
+      100% {
+          transform: translate(0%, 0%);
+      }
+  }
+  
+  .bubble-top-right {
+    animation: bubble-top-right 20s linear infinite;
+  }
+  
+  @keyframes bubble-top-right {
+      0% {
+          transform: translate(0%, 0%);
+      }
+      25% {
+          transform: translate(-10%, -10%);
+      }
+      50% {
+          transform: translate(-20%, 10%);
+      }
+      100% {
+          transform: translate(0%, 0%);
+      }
+  }

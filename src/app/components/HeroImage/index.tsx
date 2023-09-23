@@ -11,7 +11,7 @@ export default function HeroImage() {
   const [spaceImageRef, bridgeImageRef, pcbImageRef] = useTranslate();
 
   return (
-    <div className="absolute z-0 max-w-[100vw] h-full top-32 left-0 mix-blend-normal">
+    <div className="absolute z-0 w-full h-full top-32 left-0 mix-blend-normal">
       <Image
         ref={spaceImageRef}
         src={space}
