@@ -1,3 +1,4 @@
+import Contact from "./pageFragments/Contact";
 import Events from "./pageFragments/Events";
 import Hero from "./pageFragments/Hero";
 import Join from "./pageFragments/Join";
@@ -12,6 +13,7 @@ export default function Home() {
       <Events />
       <Members />
       <Join />
+      <Contact />
     </main>
   );
 }
