@@ -1,4 +1,7 @@
+import Events from "./pageFragments/Events";
 import Hero from "./pageFragments/Hero";
+import Join from "./pageFragments/Join";
+import Members from "./pageFragments/Members";
 import Mission from "./pageFragments/Mission";
 
 export default function Home() {
@@ -6,6 +9,9 @@ export default function Home() {
     <main>
       <Hero />
       <Mission />
+      <Events />
+      <Members />
+      <Join />
     </main>
   );
 }

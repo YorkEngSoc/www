@@ -31,7 +31,7 @@ export default function Hero() {
         className={`text-white relative ${lexend.className} self-end text-4xl text-right w-full pr-10 pb-10`}
       >
         Say{" "}
-        <span className="text-transparent bg-clip-text bg-gradient-to-br from-dodger-blue-700 via-yellow-500 to-pink-500">
+        <span className="text-transparent bg-clip-text bg-gradient-to-br from-dodger-blue-700 via-yellow-500 to-fuchsia-500">
           YES
         </span>{" "}
         to York Engineering Society

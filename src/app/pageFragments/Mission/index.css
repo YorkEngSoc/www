@@ -1,56 +1,28 @@
 .bubble-top-left {
-  animation: bubble-top-left 20s linear infinite;
-}
-
-@keyframes bubble-top-left {
-    0% {
-        transform: translate(0%, 0%);
-    }
-    25% {
-        transform: translate(10%, -10%);
-    }
-    50% {
-        transform: translate(-10%, 10%);
-    }
-    100% {
-        transform: translate(0%, 0%);
-    }
+  animation: bubble 7s ease infinite;
 }
 
 .bubble-middle {
-    animation: bubble-middle 20s linear infinite;
+  animation: bubble 8s ease infinite;
+  animation-delay: 2s;
+}
+
+.bubble-top-right {
+  animation: bubble 9s ease infinite;
+  animation-delay: 4s;
+}
+
+@keyframes bubble {
+  0% {
+    transform: translate(0%, 0%) scale(1);
   }
-  
-  @keyframes bubble-middle {
-      0% {
-          transform: translate(0%, 0%);
-      }
-      25% {
-          transform: translate(-10%, 10%);
-      }
-      50% {
-          transform: translate(15%, -10%);
-      }
-      100% {
-          transform: translate(0%, 0%);
-      }
+  25% {
+    transform: translate(10%, -10%) scale(1.2);
   }
-  
-  .bubble-top-right {
-    animation: bubble-top-right 20s linear infinite;
+  50% {
+    transform: translate(-10%, 10%) scale(0.8);
   }
-  
-  @keyframes bubble-top-right {
-      0% {
-          transform: translate(0%, 0%);
-      }
-      25% {
-          transform: translate(-10%, -10%);
-      }
-      50% {
-          transform: translate(-20%, 10%);
-      }
-      100% {
-          transform: translate(0%, 0%);
-      }
+  100% {
+    transform: translate(0%, 0%) scale(1);
   }
+}

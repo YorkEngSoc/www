@@ -1,0 +1,9 @@
+.bg-events {
+  background-image: linear-gradient(
+      theme(colors.dodger-blue.950/.75),
+      theme(colors.dodger-blue.950/.75)
+    ),
+    url("/qfactor.jpg");
+  background-size: cover;
+  background-position: top;
+}
