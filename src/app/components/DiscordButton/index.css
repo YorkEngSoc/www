@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .discord-button {
+    @apply bg-[#5865F2] border-[#5865F2];
+  }
+}

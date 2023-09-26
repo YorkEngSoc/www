@@ -1,7 +1,6 @@
-import Link from "next/link";
-import lexend from "../lexend";
+import DiscordButton from "@components/DiscordButton";
 import LinkButton from "@components/LinkButton";
-import DiscordLogo from "@components/DiscordLogo";
+import lexend from "../lexend";
 
 export default function Join() {
   return (
@@ -19,9 +18,7 @@ export default function Join() {
         students
       </h2>
       <div className="flex flex-row justify-between mx-auto pt-10">
-        <LinkButton href="" tw="mr-10 bg-[#5865F2] border-[#5865F2]">
-          <DiscordLogo tw="w-full max-h-7 fill-white" />
-        </LinkButton>
+        <DiscordButton tw="mr-10" />
         <LinkButton href="">I&rsquo;m and engineer</LinkButton>
         <LinkButton href="" tw="ml-10">
           All other students
