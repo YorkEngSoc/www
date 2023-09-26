@@ -4,7 +4,7 @@ import lexend from "../lexend";
 
 export default function Join() {
   return (
-    <div className="py-32 flex flex-col">
+    <div className="py-32 flex flex-col" id="join">
       <h1 className={`text-center text-9xl ${lexend.className} text-white`}>
         Join Us{" "}
         <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-dodger-blue-500 to bg-indigo-500">
@@ -19,7 +19,7 @@ export default function Join() {
       </h2>
       <div className="flex flex-row justify-between mx-auto pt-10">
         <DiscordButton tw="mr-10" />
-        <LinkButton href="">I&rsquo;m and engineer</LinkButton>
+        <LinkButton href="">I&rsquo;m an engineer</LinkButton>
         <LinkButton href="" tw="ml-10">
           All other students
         </LinkButton>

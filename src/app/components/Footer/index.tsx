@@ -28,16 +28,16 @@ export default function Footer() {
           </Link>
         </span>
       </div>
-      <div>
-        <DiscordButton tw="inline-block w-max mr-4" />
-        <LinkButton href="#" tw="aspect-square inline-block p-2 mr-4 bg-white">
+      <div className="flex flex-row">
+        <DiscordButton tw="inline-block w-max mr-4 hover:scale-100 hover:translate-y-0" />
+        <LinkButton href="#" tw="aspect-square inline-block p-2 mr-4 bg-white hover:scale-100 hover:translate-y-0">
           <Image
             src={instagram}
             alt="Instagram logo."
             className="object-contain w-7 h-7"
           />
         </LinkButton>
-        <LinkButton href="#" tw="aspect-square inline-block p-2 bg-white">
+        <LinkButton href="#" tw="aspect-square inline-block p-2 bg-white hover:scale-100 hover:translate-y-0">
           <Image
             src={github}
             alt="Github logo."

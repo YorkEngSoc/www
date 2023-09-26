@@ -18,7 +18,7 @@ export default function Hero() {
           <br />
           Discover.
           <br />
-          <Link className="relative flex pl-5 group w-max z-50" href={"#"}>
+          <Link className="relative flex pl-5 group w-max z-50" href="#join">
             <span className="z-20 mix-blend-difference text-3xl">
               Join today <ArrowIcon tw="inline w-11 h-8 pr-5" />
             </span>
