@@ -8,6 +8,6 @@ type SectionTitleT = {
 
 export default function SectionTitle({ title, tw }: SectionTitleT) {
   return (
-    <h1 className={`${lexend.className} section-title ${tw ?? ""}`}>{title}</h1>
+    <h1 className={`section-title ${tw ?? ""}`}>{title}</h1>
   );
 }

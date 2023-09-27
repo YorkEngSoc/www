@@ -9,7 +9,7 @@ import "./index.css";
 
 export default function Footer() {
   return (
-    <footer className="w-full flex flex-row justify-between px-10 py-2 relative footer items-center">
+    <footer className="w-full flex flex-row justify-between px-10 py-2 relative footer items-center mt-auto">
       <div>
         <Image
           src={logo}

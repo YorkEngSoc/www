@@ -1,0 +1,21 @@
+import { MutableRefObject, useCallback, useEffect, useRef } from "react";
+
+export default function useTranslate() {
+  const imageRef = useRef<HTMLImageElement | null>(null);
+
+  const setImageRef = useCallback((node: HTMLImageElement | null) => {
+    imageRef.current = node;
+  }, []);
+
+  function handleScroll(ev: Event) {
+    const x = ev.clientX / window.innerWidth - 0.5;
+    const y = 0.5 - ev.clientY / window.innerHeight;
+
+    imageRef.current.style.setProperty("--tw-translate-x", `${25 * x + 5}%`);
+    imageRef.current.style.setProperty("--tw-translate-y", `${-15 * y + 5}%`);
+  }
+
+  
+
+  return setImageRef;
+}

@@ -5,15 +5,13 @@ import lexend from "../lexend";
 export default function Join() {
   return (
     <div className="py-32 flex flex-col" id="join">
-      <h1 className={`text-center text-9xl ${lexend.className} text-white`}>
+      <h1 className="text-center text-9xl text-white">
         Join Us{" "}
         <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-dodger-blue-500 to bg-indigo-500">
           Today
         </span>
       </h1>
-      <h2
-        className={`font-bold text-center text-4xl leading-none ${lexend.className} text-white`}
-      >
+      <h2 className="font-bold text-center text-4xl leading-none text-white">
         <span className="text-dodger-blue-500">Free</span> for engineering
         students
       </h2>

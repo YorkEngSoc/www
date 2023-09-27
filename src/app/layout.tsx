@@ -2,6 +2,7 @@ import Navbar from "@components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import Footer from "@components/Footer";
+import lexend from "./pageFragments/lexend";
 
 export const metadata: Metadata = {
   title: "YES | York Engineering Society",
@@ -15,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-zinc-950">
+      <body
+        className={`bg-zinc-950 min-h-screen flex flex-col ${lexend.className}`}
+      >
         <Navbar />
         {children}
         <Footer />

@@ -10,7 +10,7 @@ type LinkButtonT = {
 
 export default function LinkButton({ href, tw, children }: LinkButtonT) {
   return (
-    <Link href={href} className={`link-button ${lexend.className} ${tw}`}>
+    <Link href={href} className={`link-button ${tw}`}>
       {children}
     </Link>
   );
