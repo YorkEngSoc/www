@@ -1,5 +1,6 @@
 import SectionTitle from "@components/SectionTitle";
 import LoadingGrid from "@components/LoadingGrid";
+import Image from "next/image";
 
 export type CommitteeMemberT = {
   id: number;
@@ -7,6 +8,9 @@ export type CommitteeMemberT = {
   email: string;
   image: string;
   position: string;
+  placeholder_image: string;
+  image_w: number;
+  image_h: number;
 };
 
 type CommitteeT = {
@@ -29,10 +33,14 @@ export default function Committee({ loading, data }: CommitteeT) {
                   className="px-2 text-dodger-blue-500"
                   key={`committe_member_${i}`}
                 >
-                  <img
+                  <Image
                     src={member.image}
                     alt={`${member.name}'s selfie.`}
                     className="w-full md:w-3/4 mx-auto aspect-square object-center object-cover rounded-xl"
+                    width={member.image_w}
+                    height={member.image_h}
+                    placeholder="blur"
+                    blurDataURL={`data:image/webp;base64,${member.placeholder_image}`}
                   />
                   <p className="text-center font-extrabold text-4xl pt-2">
                     {member.name}

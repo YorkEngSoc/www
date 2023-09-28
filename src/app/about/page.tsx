@@ -13,7 +13,10 @@ export default async function About() {
   try {
     const supabase = createServerComponentClient({ cookies });
 
-    const { data: committee } = (await supabase.from("committee").select()) as {
+    const { data: committee } = (await supabase
+      .from("committee")
+      .select()
+      .order("id")) as {
       data: CommitteeMemberT[] | null;
     };
 
@@ -41,6 +44,10 @@ export default async function About() {
     }
   } catch (e) {
     console.error(e);
-    return <></>;
+    return (
+      <AboutBase>
+        <Committee loading={true} />
+      </AboutBase>
+    );
   }
 }
