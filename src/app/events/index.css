@@ -1,0 +1,9 @@
+.bg-qfactor {
+  background-image: linear-gradient(
+      theme(colors.dodger-blue.950/.75) 60%,
+      theme(colors.zinc.950)
+    ),
+    url("/qfactor.jpg");
+  background-size: cover;
+  background-position: 0% 20%;
+}
