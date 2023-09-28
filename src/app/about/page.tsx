@@ -1,28 +1,46 @@
-import { Metadata } from "next";
-import AboutArtwork from "@components/AboutArtwork";
-import SectionTitle from "@components/SectionTitle";
-import AboutImages from "@components/AboutImages";
-import Committee from "../pageFragments/Committee";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { InferGetServerSidePropsType, Metadata } from "next";
+import { cookies } from "next/headers";
+import Committee, { CommitteeMemberT } from "../pageFragments/Committee";
+import AboutBase from "./base";
 
 export const metadata: Metadata = {
   title: "YES | About",
   description: "What is YES and who is on the committee",
 };
 
-export default function About() {
-  return (
-    <main>
-      <AboutArtwork />
-      <SectionTitle title="About Us" tw="pt-[calc(30vh_+_6rem)]" />
-      <p className="text-4xl px-10 pt-2 text-white">
-        Since 1900, we have been empowering our members to drive innovation,
-        shape the future, and excel in their careers by fostering a dynamic
-        community of learning, mentorship and transformative experiences. Many
-        of our alumni have gone on to have very successful international
-        careers.
-      </p>
-      <AboutImages />
-      <Committee />
-    </main>
-  );
+export default async function About() {
+  try {
+    const supabase = createServerComponentClient({ cookies });
+
+    const { data: committee } = (await supabase.from("committee").select()) as {
+      data: CommitteeMemberT[] | null;
+    };
+
+    if (committee) {
+      for (const idx in committee) {
+        const member = committee[idx];
+        const { data, error } = await supabase.storage
+          .from("committee")
+          .createSignedUrl(member.image, 60);
+
+        if (data && data.signedUrl) member.image = data.signedUrl;
+        else
+          throw new Error(
+            `${member.name}'s image does not exist on bucket: ${error}`
+          );
+      }
+
+      return (
+        <AboutBase>
+          <Committee data={committee} />
+        </AboutBase>
+      );
+    } else {
+      throw new Error("Committee array is empty");
+    }
+  } catch (e) {
+    console.error(e);
+    return <></>;
+  }
 }

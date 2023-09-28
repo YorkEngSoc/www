@@ -9,11 +9,9 @@ import "./index.css";
 export default function Navbar() {
   const pathName = usePathname();
   return (
-    <nav className="w-full fixed top-0 backdrop-blur-md px-10 py-2 grid grid-cols-3 items-center z-[500]">
-      <Link href="/">
+    <nav className="w-full fixed top-0 px-10 py-2 grid z-[500]">
+      <div className="w-1/3 mx-auto text-xs text-white rounded-full py-2 px-14 items-center backdrop-blur-xl bg-zinc-700 bg-opacity-[0.35] flex flex-row justify-between">
         <Image src={logo} alt="York Engineering Society Logo" />
-      </Link>
-      <div className="w-full text-xs text-white rounded-full py-2 px-14 items-center backdrop-blur-xl bg-zinc-700 bg-opacity-[0.35] flex flex-row justify-between">
         <Link href="/" className={pathName.length === 1 ? "active" : ""}>
           Home
         </Link>
