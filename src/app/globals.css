@@ -2,9 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbars */
+/* Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Page scroll behaviour */
+
 html {
   scroll-behavior: smooth;
 }
+
+/* Loading */
 
 @keyframes gradient-slide {
   from {
@@ -14,4 +30,38 @@ html {
   to {
     background-position: 100% 0%;
   }
+}
+
+/* Events */
+.event-gradient {
+  -webkit-mask: linear-gradient(white, white, transparent);
+  mask: linear-gradient(white, white, transparent);
+}
+
+.event-shard::after {
+  content: "";
+  position: absolute;
+
+  height: 20%;
+  width: 2px;
+
+  left: -2px;
+  top: 20%;
+
+  transition: top, opacity;
+  transition-duration: 600ms;
+  transition-timing-function: ease;
+
+  background: linear-gradient(
+    transparent,
+    theme(colors.dodger-blue.500),
+    transparent
+  );
+
+  opacity: 0;
+}
+
+.event-shard:hover::after {
+  top: 80%;
+  opacity: 1;
 }

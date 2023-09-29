@@ -2,6 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import EventsGrid, { EventT } from "../pageFragments/EventsGrid";
 import EventsBase from "./base";
 import { cookies } from "next/headers";
+import React, { useMemo } from "react";
 
 export default async function Events() {
   try {
@@ -13,16 +14,7 @@ export default async function Events() {
 
     if (!events) events = [];
 
-    events.push({
-      id: -1,
-      title: "Weekly Labs",
-      body: "Join us if you need help with any of your projects",
-      form: "",
-      location: "P/T/401",
-      start: "Every Wednesday 2:30pm-5:00pm",
-      end: "",
-      image: "",
-    });
+    console.log(events);
 
     return (
       <EventsBase>
