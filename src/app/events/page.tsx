@@ -1,4 +1,5 @@
 export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import EventsGrid, { EventT } from "../pageFragments/EventsGrid";
