@@ -14,8 +14,6 @@ export default async function Events() {
 
     if (!events) events = [];
 
-    console.log(events);
-
     return (
       <EventsBase>
         <EventsGrid data={events} />

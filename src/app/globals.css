@@ -22,6 +22,18 @@ html {
 
 /* Loading */
 
+.loading-gradient {
+  background-image: linear-gradient(
+    to right,
+    theme(colors.zinc.900),
+    theme(colors.zinc.600),
+    theme(colors.zinc.900)
+  );
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  animation: gradient-slide 1.5s ease infinite;
+}
+
 @keyframes gradient-slide {
   from {
     background-position: -100% 0%;
@@ -34,8 +46,8 @@ html {
 
 /* Events */
 .event-gradient {
-  -webkit-mask: linear-gradient(white, white, transparent);
-  mask: linear-gradient(white, white, transparent);
+  -webkit-mask: linear-gradient(white, theme(colors.white/.5) 66%, transparent);
+  mask: linear-gradient(white, theme(colors.white/.5) 66%, transparent);
 }
 
 .event-shard::after {

@@ -67,8 +67,14 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
                           {event.title}
                         </h3>
                         <p className="text-dodger-blue-600 py-4 text-lg">
-                          <CalendarIcon tw="w-10 h-10 inline" /> {event.start} -{" "}
-                          {event.end}
+                          <CalendarIcon tw="w-10 h-10 inline" />{" "}
+                          {event.start
+                            ? new Date(event.start).toLocaleString()
+                            : "Every Wednesday 14:30"}{" "}
+                          -{" "}
+                          {event.end
+                            ? new Date(event.end).toLocaleString()
+                            : "17:00"}
                         </p>
                         <p className="text-dodger-blue-600 pb-4 text-lg">
                           <LocationIcon tw="w-10 h-10 inline" />{" "}
