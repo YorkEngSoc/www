@@ -1,21 +1,19 @@
-import HeroImage from "@components/HeroImage";
-import Link from "next/link";
-import ArrowIcon from "@components/ArrowIcon";
-import artwork from "./assets/home.png";
-import Image from "next/image";
-import lexend from "../lexend";
 import AnimatedLinkButton from "@components/AnimatedLinkButton";
+import HeroImage from "@components/HeroImage";
+import Image from "next/image";
+import artwork from "./assets/home.png";
+import "./index.css";
 
 export default function Hero() {
   return (
-    <div className="min-h-screen w-full flex relative">
-      <h1 className="px-10 pt-32 relative text-white 2xl:text-9xl lg:text-7xl xl:text-8xl 2xl:leading-normal xl:leading-normal lg:leading-normal z-50">
+    <div className="min-h-screen w-full flex flex-col justify-between relative">
+      <h1 className="text-center pt-32 relative mx-auto text-white 2xl:text-9xl lg:text-7xl xl:text-8xl 2xl:leading-normal xl:leading-normal lg:leading-normal z-50 font-extrabold">
         <span className="relative z-50 mix-blend-exclusion">
-          Collaborate.
+          <span className="base-hero-text collaborate">Collaborate.</span>
           <br />
-          Innovate.
+          <span className="base-hero-text innovate">Innovate.</span>
           <br />
-          Discover.
+          <span className="base-hero-text discover">Discover.</span>
           <br />
           <AnimatedLinkButton text="Join today" href="#join" />
         </span>

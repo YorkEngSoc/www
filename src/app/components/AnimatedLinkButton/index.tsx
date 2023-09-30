@@ -14,7 +14,7 @@ export default function AnimatedLinkButton({
 }: AnimatedLinkButtonT) {
   return (
     <Link
-      className="relative flex pl-5 group w-max z-50 text-white"
+      className="relative flex pl-5 group w-max z-50 text-white font-normal"
       href={href}
       target={newtab ? "_blank" : undefined}
       referrerPolicy={newtab ? "no-referrer" : undefined}

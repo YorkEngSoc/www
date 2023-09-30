@@ -1,20 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.w-hero-image {
+.hero-image {
   width: 500px;
-  transition-timing-function: cubic-bezier(0.3, 0.45, 0.7, 0.8);
-}
-
-@media screen and (min-width: 1024px) {
-  .w-hero-image {
-    width: 300px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .w-hero-image {
-    width: 500px;
-  }
+  animation-name: hover;
+  animation-timing-function: cubic-bezier(0.3, 0.45, 0.7, 0.8);
+  animation-iteration-count: infinite;
 }

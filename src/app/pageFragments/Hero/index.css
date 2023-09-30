@@ -1,0 +1,57 @@
+.base-hero-text {
+  color: white;
+  animation-duration: 10s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
+.collaborate {
+  --color: theme(colors.dodger-blue.500);
+  animation-name: collaborate-fade;
+}
+
+.innovate {
+  --color: theme(colors.yellow.500);
+  animation-name: innovate-fade;
+}
+
+.discover {
+  --color: theme(colors.fuchsia.500);
+  animation-name: discover-fade;
+}
+
+@keyframes collaborate-fade {
+  0%,
+  10%,
+  40% {
+    color: white;
+  }
+  20%,
+  30% {
+    color: var(--color);
+  }
+}
+
+@keyframes innovate-fade {
+  0%,
+  40%,
+  70% {
+    color: white;
+  }
+  50%,
+  60% {
+    color: var(--color);
+  }
+}
+
+@keyframes discover-fade {
+  0%,
+  70%,
+  100% {
+    color: white;
+  }
+  80%,
+  90% {
+    color: var(--color);
+  }
+}

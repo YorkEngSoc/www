@@ -1,5 +1,5 @@
 export const revalidate = 3600;
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { InferGetServerSidePropsType, Metadata } from "next";
@@ -26,7 +26,7 @@ export default async function About() {
       data: CommitteeMemberT[] | null;
     };
 
-    if (committee) {
+    if (committee && committee.length > 0) {
       for (const idx in committee) {
         const member = committee[idx];
         const { data, error } = await supabase.storage

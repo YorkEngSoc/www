@@ -5,30 +5,33 @@ import space from "./assets/space.jpg";
 import bridge from "./assets/bridge.jpg";
 import pcb from "./assets/pcb.jpg";
 import "./index.css";
-import useTranslate from "./useTranslate";
 
 export default function HeroImage() {
-  const [spaceImageRef, bridgeImageRef, pcbImageRef] = useTranslate();
-
   return (
     <div className="absolute z-0 w-full h-full top-32 left-0 mix-blend-normal">
       <Image
-        // ref={spaceImageRef}
         src={space}
-        className="w-hero-image aspect-video object-cover translate-x-0 translate-y-0 left-1/2 absolute -z-10 transition-transform duration-150 origin-center animate-[hover_10s_ease_infinite]"
+        className="hero-image shadow-2xl shadow-fuchsia-700 aspect-square rounded-full object-cover left-[110%] absolute -z-10"
         alt="An image of space."
+        style={{
+          animationDuration: "10s",
+        }}
       />
       <Image
-        // ref={bridgeImageRef}
         src={bridge}
-        className="w-hero-image aspect-video object-cover translate-x-0 translate-y-0 left-[80%] top-[15%] absolute -z-20 transition-transform duration-150 delay-[5ms] origin-center animate-[hover_10s_0.5s_ease_infinite]"
+        className="hero-image shadow-2xl shadow-yellow-700 aspect-square rounded-full object-cover -left-3/4 top-1/4 absolute -z-10"
         alt="An image of a bridge."
+        style={{
+          animationDuration: "11s",
+        }}
       />
       <Image
-        // ref={pcbImageRef}
         src={pcb}
-        className="w-hero-image aspect-video object-cover translate-x-0 translate-y-0 left-[100%] top-[30%] absolute -z-30 transition-transform duration-150 delay-[10ms] origin-center animate-[hover_10s_1s_ease_infinite]"
+        className="hero-image shadow-2xl shadow-dodger-blue-700 aspect-square rounded-full object-cover left-3/4 top-3/4 absolute -z-10"
         alt="An image of a pcb."
+        style={{
+          animationDuration: "12s",
+        }}
       />
     </div>
   );
