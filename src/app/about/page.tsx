@@ -11,7 +11,10 @@ export const metadata: Metadata = {
 
 export default async function About() {
   try {
-    const supabase = createServerComponentClient({ cookies });
+    const cookieStore = cookies();
+    const supabase = createServerComponentClient({
+      cookies: () => cookieStore,
+    });
 
     const { data: committee } = (await supabase
       .from("committee")

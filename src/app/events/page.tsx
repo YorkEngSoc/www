@@ -6,7 +6,10 @@ import React, { useMemo } from "react";
 
 export default async function Events() {
   try {
-    const supabase = createServerComponentClient({ cookies });
+    const cookieStore = cookies();
+    const supabase = createServerComponentClient({
+      cookies: () => cookieStore,
+    });
 
     let { data: events } = (await supabase.from("events").select()) as {
       data: EventT[] | null;

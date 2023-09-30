@@ -10,7 +10,10 @@ import LocationIcon from "@components/LocationIcon";
 
 export default async function Event({ params }: { params: { id: string } }) {
   try {
-    const supabase = createServerComponentClient({ cookies });
+    const cookieStore = cookies();
+    const supabase = createServerComponentClient({
+      cookies: () => cookieStore,
+    });
 
     let { data: events } = (await supabase
       .from("events")
