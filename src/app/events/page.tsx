@@ -1,3 +1,5 @@
+export const revalidate = 3600;
+
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import EventsGrid, { EventT } from "../pageFragments/EventsGrid";
 import EventsBase from "./base";
