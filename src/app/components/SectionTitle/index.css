@@ -4,6 +4,6 @@
 
 @layer components {
   .section-title {
-    @apply text-dodger-blue-500 text-8xl pl-10;
+    @apply text-dodger-blue-500 text-5xl lg:text-8xl lg:pl-10 pl-2;
   }
 }

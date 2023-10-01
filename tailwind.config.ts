@@ -31,18 +31,8 @@ const config: Config = {
       transitionTimingFunction: {
         ease: "ease",
       },
-      keyframes: {
-        hover: {
-          "0%": {
-            transform: "translateY(-10%)",
-          },
-          "50%": {
-            transform: "translateY(10%)",
-          },
-          "100%": {
-            transform: "translateY(-10%)",
-          },
-        },
+      screens: {
+        "3xl": "2560px",
       },
     },
   },

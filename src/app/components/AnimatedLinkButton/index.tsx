@@ -19,10 +19,10 @@ export default function AnimatedLinkButton({
       target={newtab ? "_blank" : undefined}
       referrerPolicy={newtab ? "no-referrer" : undefined}
     >
-      <span className="z-20 mix-blend-difference text-3xl">
-        {text} <ArrowIcon tw="inline w-11 h-8 pr-5" />
+      <span className="z-20 mix-blend-difference text-lg xl:text-3xl">
+        {text} <ArrowIcon tw="inline xl:w-11 xl:h-8 w-10 h-7 pr-5" />
       </span>
-      <span className="z-10 absolute top-0 left-0 w-10 h-10 bg-white rounded-full group-hover:w-full transition-[width] duration-200"></span>
+      <span className="z-10 absolute top-0 left-0 w-full h-7 lg:w-10 lg:h-10 bg-white rounded-full group-hover:w-full transition-[width] duration-200"></span>
     </Link>
   );
 }
