@@ -43,7 +43,7 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
                   <div className="px-2">
                     <Link
                       href={`/events/${event.id}`}
-                      className="block text-dodger-blue-500 rounded-xl relative w-full sm:w-3/4 mx-auto border-2 border-zinc-700 bg-zinc-800 event-shard"
+                      className="block text-dodger-blue-500 rounded-xl relative w-full 2xl:w-3/4 mx-auto border-2 border-zinc-700 bg-zinc-800 event-shard"
                       key={`committe_member_${i}`}
                     >
                       {typeof event.image === "string" ? (
@@ -63,11 +63,11 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
                         />
                       )}
                       <div className="flex flex-col p-4 text-left">
-                        <h3 className="text-dodger-blue-500 font-extrabold text-4xl">
+                        <h3 className="text-dodger-blue-500 font-extrabold text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                           {event.title}
                         </h3>
-                        <p className="text-dodger-blue-600 py-4 text-lg">
-                          <CalendarIcon tw="w-10 h-10 inline" />{" "}
+                        <p className="text-dodger-blue-600 py-4 text-sm sm:text-base lg:text-lg">
+                          <CalendarIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 inline" />{" "}
                           {event.start
                             ? new Date(event.start).toLocaleString()
                             : "Every Wednesday 14:30"}{" "}
@@ -76,15 +76,15 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
                             ? new Date(event.end).toLocaleString()
                             : "17:00"}
                         </p>
-                        <p className="text-dodger-blue-600 pb-4 text-lg">
-                          <LocationIcon tw="w-10 h-10 inline" />{" "}
+                        <p className="text-dodger-blue-600 pb-4 text-sm sm:text-base lg:text-lg">
+                          <LocationIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 inline" />{" "}
                           {event.location}
                         </p>
-                        <p className="pt-2 text-white text-xl">
+                        <p className="pt-2 text-white text-lg lg:text-xl">
                           {event.short_description}
                         </p>
                       </div>
-                      <div className="absolute top-4 left-4 rounded-xl bg-zinc-900 p-4 ">
+                      <div className="absolute top-4 left-4 text-base sm:text-xs md:text-base rounded-xl bg-zinc-900 p-4 ">
                         {event.form ? (
                           <span>Registrations open</span>
                         ) : (
