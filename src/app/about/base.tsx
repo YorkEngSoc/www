@@ -14,10 +14,10 @@ export default function AboutBase({ children }: AboutBaseT) {
       <Image
         src={header}
         alt="Sci-Fi artwork"
-        className="mx-auto"
+        className="mx-auto pt-14 lg:pt-0"
       />
       <SectionTitle title="About Us" tw="pt-6" />
-      <p className="text-4xl px-10 pt-2 text-white">
+      <p className="text-xl sm:text-3xl lg:text-4xl px-2 lg:px-10 pt-2 text-white">
         Since 1900, we have been empowering our members to drive innovation,
         shape the future, and excel in their careers by fostering a dynamic
         community of learning, mentorship and transformative experiences. Many

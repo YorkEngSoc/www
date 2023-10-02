@@ -9,17 +9,17 @@ export default function AboutImages() {
       <Image
         src={construction}
         alt="A picture from the building/construction event."
-        className="aspect-square w-1/4 rounded-lg object-cover"
+        className="aspect-square w-full md:w-1/4 rounded-lg object-cover inline"
       />
       <Image
         src={chartered}
         alt="A picture from the 'Life as a chartered engineer' event."
-        className="aspect-square w-1/4 rounded-lg object-cover"
+        className="aspect-square w-1/4 rounded-lg object-cover hidden md:inline"
       />
       <Image
         src={qfactor}
         alt="A picture from QFactor 2023."
-        className="aspect-square w-1/4 rounded-lg object-cover"
+        className="aspect-square w-1/4 rounded-lg object-cover hidden md:inline"
       />
     </div>
   );

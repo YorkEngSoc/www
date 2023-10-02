@@ -23,7 +23,7 @@ export default function Committee({ loading, data }: CommitteeT) {
     <div>
       <SectionTitle title="Our Committee" tw="pt-10" />
       {(data || loading) && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:px-10 sm:gap-6 xl:gap-8 pt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:px-10 gap-8 pt-10">
           {loading ? (
             <LoadingGrid />
           ) : (
@@ -36,7 +36,7 @@ export default function Committee({ loading, data }: CommitteeT) {
                   <Image
                     src={member.image}
                     alt={`${member.name}'s selfie.`}
-                    className="w-full md:w-3/4 mx-auto aspect-square object-center object-cover rounded-xl"
+                    className="w-3/4 mx-auto aspect-square object-center object-cover rounded-xl"
                     width={member.image_w}
                     height={member.image_h}
                     placeholder="blur"
