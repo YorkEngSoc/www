@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import { EventT } from "../../pageFragments/EventsGrid";
 import pink from "../../pageFragments/EventsGrid/assets/pink.jpg";
+import Loading from "./loading";
 
 export default async function Event({ params }: { params: { id: string } }) {
   try {
@@ -21,11 +22,11 @@ export default async function Event({ params }: { params: { id: string } }) {
       data: EventT[] | null;
     };
 
-    let event = undefined;
+    let event: EventT | undefined = undefined;
 
     if (events && events.length > 0) event = events[0];
 
-    if (event) {
+    if (event !== undefined) {
       return (
         <main className="grid text-white">
           <div className="md:sticky top-0 w-full h-[40vh]">
@@ -99,5 +100,8 @@ export default async function Event({ params }: { params: { id: string } }) {
     } else throw new Error(`Event ${params.id} does not exist`);
   } catch (e) {
     console.error(e);
+    return (
+      <Loading />
+    )
   }
 }
