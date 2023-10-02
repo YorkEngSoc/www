@@ -33,7 +33,7 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
   return (
     <>
       {(events || loading) && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:px-10 sm:gap-6 xl:gap-8 pt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 pt-10 sm:px-10">
           {loading ? (
             <LoadingGrid />
           ) : (
@@ -43,7 +43,7 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
                   <div className="px-2">
                     <Link
                       href={`/events/${event.id}`}
-                      className="block text-dodger-blue-500 rounded-xl relative w-full md:w-3/4 border-2 border-zinc-700 bg-zinc-800 event-shard"
+                      className="block text-dodger-blue-500 rounded-xl relative w-full sm:w-3/4 mx-auto border-2 border-zinc-700 bg-zinc-800 event-shard"
                       key={`committe_member_${i}`}
                     >
                       {typeof event.image === "string" ? (
