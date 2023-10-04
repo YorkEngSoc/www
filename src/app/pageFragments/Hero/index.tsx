@@ -6,7 +6,7 @@ import "./index.css";
 
 export default function Hero() {
   return (
-    <div className="h-screen w-full flex flex-col justify-between relative">
+    <div className="min-h-screen w-full flex flex-col justify-between relative">
       <div className="flex sm:h-2/3">
         <h1 className="text-center pt-32 my-auto relative mx-auto text-white 2xl:text-9xl lg:text-7xl xl:text-8xl text-5xl leading-normal 2xl:leading-normal xl:leading-normal lg:leading-normal z-50 font-extrabold">
           <span className="relative z-50">
