@@ -33,7 +33,7 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
   return (
     <>
       {(events || loading) && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 pt-10 sm:px-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 pt-10 sm:px-10">
           {loading ? (
             <LoadingGrid />
           ) : (
@@ -43,7 +43,7 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
                   <div className="px-2">
                     <Link
                       href={`/events/${event.id}`}
-                      className="block text-dodger-blue-500 rounded-xl relative w-full 2xl:w-3/4 mx-auto border-2 border-zinc-700 bg-zinc-800 event-shard"
+                      className="block text-dodger-blue-500 rounded-xl relative w-3/4 mx-auto border-2 border-zinc-700 bg-zinc-800 event-shard"
                       key={`committe_member_${i}`}
                     >
                       {typeof event.image === "string" ? (
@@ -84,7 +84,7 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
                           {event.short_description}
                         </p>
                       </div>
-                      <div className="absolute top-4 left-4 text-base sm:text-xs md:text-base rounded-xl bg-zinc-900 p-4 ">
+                      <div className="absolute top-1 left-1 sm:top-4 sm:left-4 text-xs md:text-base rounded-xl bg-zinc-900 p-4 ">
                         {event.form ? (
                           <span>Registrations open</span>
                         ) : (
