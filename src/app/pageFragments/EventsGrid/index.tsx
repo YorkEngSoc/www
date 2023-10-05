@@ -22,9 +22,10 @@ export type EventT = {
 type EventsGridT = {
   data?: EventT[];
   loading?: boolean;
+  isAdmin?: boolean;
 };
 
-export default function EventsGrid({ loading, data }: EventsGridT) {
+export default function EventsGrid({ loading, data, isAdmin }: EventsGridT) {
   const events = data?.map((event) => {
     if (!event.image) event.image = pink;
 
@@ -42,7 +43,7 @@ export default function EventsGrid({ loading, data }: EventsGridT) {
                 <>
                   <div className="px-2">
                     <Link
-                      href={`/events/${event.id}`}
+                      href={`${isAdmin ? "/committee" : ""}/events/${event.id}`}
                       className="block text-dodger-blue-500 rounded-xl relative w-3/4 mx-auto border-2 border-zinc-700 bg-zinc-800 event-shard"
                       key={`committe_member_${i}`}
                     >

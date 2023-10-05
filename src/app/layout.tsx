@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Footer from "@components/Footer";
 import lexend from "./pageFragments/lexend";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "YES | York Engineering Society",

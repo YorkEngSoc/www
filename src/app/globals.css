@@ -77,3 +77,14 @@ html {
   top: 80%;
   opacity: 1;
 }
+
+/* Link button */
+@layer components {
+  .link-button {
+    @apply text-white px-4 py-2 text-lg border-2 border-white bg-transparent rounded-lg scale-100 translate-y-0 hover:scale-110 hover:-translate-y-1 transition-transform duration-200;
+  }
+
+  .discord-button {
+    @apply bg-[#5865F2] border-[#5865F2];
+  }
+}

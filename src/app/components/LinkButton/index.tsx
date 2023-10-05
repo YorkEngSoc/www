@@ -1,5 +1,4 @@
 import Link from "next/link";
-import "./index.css";
 import lexend from "../../pageFragments/lexend";
 
 type LinkButtonT = {

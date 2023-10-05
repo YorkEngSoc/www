@@ -1,6 +1,5 @@
 import DiscordLogo from "@components/DiscordLogo";
 import LinkButton from "@components/LinkButton";
-import "./index.css";
 
 type DiscordButtonT = {
   tw?: string;
