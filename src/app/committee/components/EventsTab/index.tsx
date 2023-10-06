@@ -29,6 +29,18 @@ export default function EventsTab() {
 
           if (error) console.error(error);
 
+          if (events) {
+            events.forEach((event) => {
+              if (typeof event.image === "string" && event.image.length > 0) {
+                const {
+                  data: { publicUrl },
+                } = supabase.storage.from("events").getPublicUrl(event.image);
+
+                event.image = publicUrl;
+              }
+            });
+          }
+
           setEvents(events as EventT[] | null);
         });
 

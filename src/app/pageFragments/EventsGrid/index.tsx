@@ -3,7 +3,6 @@ import LoadingGrid from "@components/LoadingGrid";
 import LocationIcon from "@components/LocationIcon";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
 import pink from "./assets/pink.jpg";
 
 export type EventT = {
@@ -17,6 +16,8 @@ export type EventT = {
   form: string;
   image: string | StaticImageData;
   placeholder_image: string;
+  image_w?: number;
+  image_h?: number;
 };
 
 type EventsGridT = {
@@ -54,6 +55,8 @@ export default function EventsGrid({ loading, data, isAdmin }: EventsGridT) {
                           className="w-full aspect-square object-center object-cover event-gradient rounded-t-[calc(0.75rem_-_2px)]"
                           placeholder="blur"
                           blurDataURL={event.placeholder_image}
+                          width={event.image_w}
+                          height={event.image_h}
                         />
                       ) : (
                         <Image

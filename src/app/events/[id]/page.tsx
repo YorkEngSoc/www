@@ -24,7 +24,16 @@ export default async function Event({ params }: { params: { id: string } }) {
 
     let event: EventT | undefined = undefined;
 
-    if (events && events.length > 0) event = events[0];
+    if (events && events.length > 0) {
+      event = events[0];
+      if (typeof event.image === "string" && event.image.length > 0) {
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from("events").getPublicUrl(event.image);
+
+        event.image = publicUrl;
+      }
+    }
 
     if (event !== undefined) {
       return (
@@ -38,6 +47,8 @@ export default async function Event({ params }: { params: { id: string } }) {
                   placeholder="blur"
                   blurDataURL={event.placeholder_image}
                   className="w-full h-full object-cover event-gradient"
+                  width={event.image_w}
+                  height={event.image_h}
                 />
               ) : (
                 <Image
@@ -55,7 +66,9 @@ export default async function Event({ params }: { params: { id: string } }) {
           </div>
           <div className="w-full md:w-3/4 2xl:w-1/2 px-2 md:px-0 mx-auto flex flex-col md:flex-row event-shard relative md:border-l-2 md:border-b-2 border-zinc-700 rounded-bl-xl">
             <div className="w-full md:w-2/3 pt-2 md:px-4">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl">What&rsquo;s this event?</h2>
+              <h2 className="text-3xl md:text-5xl lg:text-6xl">
+                What&rsquo;s this event?
+              </h2>
               <div
                 className="text-xl lg:text-3xl xl:text-4xl pt-10"
                 dangerouslySetInnerHTML={{ __html: event.body }}
@@ -64,7 +77,8 @@ export default async function Event({ params }: { params: { id: string } }) {
             <div className="w-full md:w-1/3 pt-10 md:pt-2 md:pr-2 md:pl-6 pb-10 md:border-l-2 border-zinc-700">
               <div>
                 <h3 className="text-3xl items-center flex">
-                  <CalendarIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 inline" /> When:
+                  <CalendarIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 inline" />{" "}
+                  When:
                 </h3>
                 <p className="text-xl pt-2">
                   Start:{" "}
@@ -79,7 +93,8 @@ export default async function Event({ params }: { params: { id: string } }) {
               </div>
               <div className="pt-4 md:pt-10">
                 <h3 className="text-3xl items-center flex">
-                  <LocationIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 inline" /> Where:
+                  <LocationIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 inline" />{" "}
+                  Where:
                 </h3>
                 <p className="text-xl pt-2">{event.location}</p>
               </div>
@@ -100,8 +115,6 @@ export default async function Event({ params }: { params: { id: string } }) {
     } else throw new Error(`Event ${params.id} does not exist`);
   } catch (e) {
     console.error(e);
-    return (
-      <Loading />
-    )
+    return <Loading />;
   }
 }

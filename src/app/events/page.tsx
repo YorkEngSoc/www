@@ -1,5 +1,5 @@
 export const revalidate = 3600;
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import EventsGrid, { EventT } from "../pageFragments/EventsGrid";
@@ -19,6 +19,16 @@ export default async function Events() {
     };
 
     if (!events) events = [];
+
+    events.forEach((event) => {
+      if (typeof event.image === "string" && event.image.length > 0) {
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from("events").getPublicUrl(event.image);
+
+        event.image = publicUrl;
+      }
+    });
 
     return (
       <EventsBase>
