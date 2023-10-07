@@ -34,10 +34,22 @@ export async function POST(req: NextRequest) {
         }
       );
 
-      let imagePathRes: string | undefined = undefined;
-
       if (image) {
         const sanitisedFileName = image.name.replaceAll(/[^a-zA-Z0-9.]+/gi, "");
+
+        if (event.image && typeof event.image === "string") {
+          const { data, error } = await supabase.storage
+            .from("events")
+            .remove([event.image]);
+
+          if (error) {
+            console.error(error);
+
+            return new Response("Could not delete previous image", {
+              status: 500,
+            });
+          }
+        }
 
         event.image = sanitisedFileName;
 
@@ -65,11 +77,14 @@ export async function POST(req: NextRequest) {
           });
 
         if (error) {
-          console.error(error);
+          console.error(`For image "${image.name}": ${error.message}`);
 
-          return new Response("Could not upload image", {
-            status: 500,
-          });
+          return new Response(
+            JSON.stringify({ message: "Could not upload image" }),
+            {
+              status: 500,
+            }
+          );
         }
       }
 
@@ -84,29 +99,120 @@ export async function POST(req: NextRequest) {
         if (error) {
           console.error(error);
 
-          return new Response("Could not update event", {
-            status: 500,
-          });
+          return new Response(
+            JSON.stringify({ message: "Could not update event" }),
+            {
+              status: 500,
+            }
+          );
         }
       } else {
-        const { error } = await supabase.from("events").insert(event);
+        const { error, data } = await supabase
+          .from("events")
+          .insert(event)
+          .select();
+
+        if (data && data[0]) {
+          event.id = data[0].id;
+        }
 
         if (error) {
           console.error(error);
 
-          return new Response("Could not create event", {
+          return new Response(
+            JSON.stringify({ message: "Could not create event" }),
+            {
+              status: 500,
+            }
+          );
+        }
+      }
+
+      return new Response(
+        JSON.stringify({
+          message: `Successfully ${event?.id ? "updated" : "created"} event`,
+          id: event?.id,
+        }),
+        {
+          status: 200,
+        }
+      );
+    }
+  }
+
+  return new Response(JSON.stringify({ message: "Unauthorised" }), {
+    status: 403,
+  });
+}
+
+export async function DELETE(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (session) {
+    const data = await req.formData();
+    const eventId = data.get("eventId") as string | null;
+
+    if (eventId) {
+      const cookiesStore = cookies();
+      const supabase = createRouteHandlerClient(
+        {
+          cookies: () => cookiesStore,
+        },
+        {
+          options: {
+            global: {
+              headers: {
+                Authorization: `Bearer ${session.supabaseAccessToken}`,
+              },
+            },
+          },
+        }
+      );
+
+      const { data: events, error } = await supabase
+        .from("events")
+        .delete()
+        .eq("id", eventId)
+        .select();
+
+      if (error || !events || events.length === 0) {
+        console.error(error);
+
+        return new Response(
+          JSON.stringify({ message: "Could not delete event" }),
+          {
+            status: 500,
+          }
+        );
+      }
+
+      const event = events[0] as EventT;
+
+      if (event.image) {
+        const { data, error } = await supabase.storage
+          .from("events")
+          .remove([event.image as string]);
+
+        if (error) {
+          console.error(error);
+
+          return new Response("Could not delete event image", {
             status: 500,
           });
         }
       }
-    }
 
-    return new Response("", {
-      status: 200,
-    });
+      return new Response(
+        JSON.stringify({
+          message: "Successfully deleted event",
+        }),
+        {
+          status: 200,
+        }
+      );
+    }
   }
 
-  return new Response("", {
+  return new Response(JSON.stringify({ message: "Unauthorised" }), {
     status: 403,
   });
 }

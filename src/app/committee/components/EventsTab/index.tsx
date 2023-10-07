@@ -24,6 +24,7 @@ export default function EventsTab() {
       supabase
         .from("events")
         .select()
+        .neq("id", 1)
         .then((res) => {
           const { data: events, error } = res;
 

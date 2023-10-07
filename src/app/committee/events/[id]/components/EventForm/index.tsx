@@ -1,16 +1,18 @@
 import { ThemeProvider, createTheme } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import moment from "moment";
+import { useEffect, useRef, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Id, toast } from "react-toastify";
 import { EventT } from "../../../../../pageFragments/EventsGrid";
-import "./index.css";
-import { useEffect, useState } from "react";
 import Input from "../Input";
-import moment, { Moment } from "moment";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import "./index.css";
+import { redirect, useRouter } from "next/navigation";
 
 type EventFormT = {
   event?: EventT;
@@ -35,13 +37,13 @@ export default function EventForm({ event }: EventFormT) {
     watch,
   } = useForm<InputsT>();
   const supabase = createClientComponentClient();
+  const toastId = useRef<Id | null>(null);
+  const router = useRouter();
+  const [blockSubmit, setBlockSubmit] = useState<boolean>(false);
 
   const imageState = watch("image");
   const [imageURL, setImageURL] = useState<string | undefined>(undefined);
   const [image, setImage] = useState<File | undefined>(undefined);
-  const [existingImage, _] = useState<string | undefined>(
-    event?.image as string | undefined
-  );
 
   useEffect(() => {
     if (imageState && imageState[0]) {
@@ -72,34 +74,132 @@ export default function EventForm({ event }: EventFormT) {
     const formData = new FormData();
     if (image) formData.append("image", image);
 
+    toastId.current = toast.loading("Uploading...", { autoClose: false });
+
     formData.append(
       "event",
       JSON.stringify({
         ...data,
-        image: image ? undefined : event?.image,
+        image: event?.image,
         id: event?.id,
       })
     );
+
+    setBlockSubmit(true);
 
     fetch("/api/events", {
       method: "POST",
       body: formData,
     })
-      .then((res) => {
-        console.log(res);
+      .then(async (res) => {
+        if (toastId.current) {
+          const responseBody: { message: string; id?: number } =
+            await res.json();
+          let toastType = toast.TYPE.INFO;
+
+          switch (res.status) {
+            case 200:
+              toastType = toast.TYPE.SUCCESS;
+              break;
+            case 500:
+            default:
+              toastType = toast.TYPE.ERROR;
+              break;
+          }
+
+          toast.update(toastId.current, {
+            type: toastType,
+            render: responseBody.message,
+            autoClose: 5000,
+            isLoading: false,
+          });
+
+          toast.onChange((payload) => {
+            if (payload.status === "removed" && payload.id == toastId.current) {
+              if (payload.type === toast.TYPE.SUCCESS) {
+                router.push(`/committee/events/${responseBody.id}`);
+              }
+              setBlockSubmit(false);
+            }
+          });
+        }
       })
       .catch((e) => {
         console.error(e);
+
+        if (toastId.current) {
+          toast.update(toastId.current, {
+            type: toast.TYPE.ERROR,
+            render: "Something went wrong",
+            autoClose: 5000,
+            isLoading: false,
+          });
+        }
+      });
+  };
+
+  const onDelete: SubmitHandler<InputsT> = () => {
+    const formData = new FormData();
+    formData.append("eventId", event?.id.toString() ?? "-1");
+
+    toastId.current = toast.loading("Deleting...", { autoClose: false });
+
+    setBlockSubmit(true);
+
+    fetch("/api/events", {
+      method: "DELETE",
+      body: formData,
+    })
+      .then(async (res) => {
+        if (toastId.current) {
+          const responseBody: { message: string } = await res.json();
+          let toastType = toast.TYPE.INFO;
+
+          switch (res.status) {
+            case 200:
+              toastType = toast.TYPE.SUCCESS;
+              break;
+            case 500:
+            default:
+              toastType = toast.TYPE.ERROR;
+              break;
+          }
+
+          toast.update(toastId.current, {
+            type: toastType,
+            render: responseBody.message,
+            autoClose: 5000,
+            isLoading: false,
+          });
+
+          toast.onChange((payload) => {
+            if (payload.status === "removed" && payload.id == toastId.current) {
+              if (payload.type === toast.TYPE.SUCCESS) {
+                router.push(`/committee`);
+              }
+              setBlockSubmit(false);
+            }
+          });
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+
+        if (toastId.current) {
+          toast.update(toastId.current, {
+            type: toast.TYPE.ERROR,
+            render: "Something went wrong",
+            autoClose: 5000,
+            isLoading: false,
+          });
+        }
       });
   };
 
   return (
     <ThemeProvider theme={darkTheme}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <form
-          className="w-3/4 mx-auto grid gird-rows-1 grid-cols-2 text-white pb-10"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="w-3/4 mx-auto grid gird-rows-1 grid-cols-2 text-white pb-10">
           <div className="flex flex-col">
             <Input
               name="title"
@@ -194,12 +294,28 @@ export default function EventForm({ event }: EventFormT) {
                 This field is required
               </span>
             )}
-            <button
-              type="submit"
-              className="p-4 bg-dodger-blue-500 rounded-lg text-white w-2/3 mt-10"
-            >
-              Submit
-            </button>
+            <div className={`flex flex-row w-2/3 ${event?.id && "gap-4"}`}>
+              <button
+                type="submit"
+                className={`p-4 bg-dodger-blue-500 rounded-lg text-white mt-10 disabled:bg-dodger-blue-800 disabled:text-zinc-400 ${
+                  event?.id ? "w-1/2" : "w-full"
+                }`}
+                disabled={blockSubmit}
+                onClick={handleSubmit(onSubmit)}
+              >
+                Submit
+              </button>
+              {event?.id && (
+                <button
+                  type="submit"
+                  className="p-4 bg-red-500 rounded-lg text-white mt-10 disabled:bg-red-800 disabled:text-zinc-400 w-1/2"
+                  disabled={blockSubmit}
+                  onClick={handleSubmit(onDelete)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
           </div>
           <div className="flex flex-col">
             <div className="flex flex-row items-center mb-2">
