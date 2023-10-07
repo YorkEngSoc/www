@@ -1,14 +1,18 @@
-"use client";
-
 import { SessionProvider } from "next-auth/react";
 import MainCommitte from "./components/main";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import EventsTab from "./components/EventsTab";
 
-export default function Committee() {
+export default async function Committee() {
+  const session = await getServerSession(authOptions);
+
   return (
-    <SessionProvider>
-      <main className="flex flex-col pt-20">
-        <MainCommitte />
-      </main>
-    </SessionProvider>
+    <main className="flex flex-col pt-20">
+      <MainCommitte
+        session={session ? true : false}
+        eventsTab={<EventsTab />}
+      />
+    </main>
   );
 }

@@ -1,8 +1,11 @@
+"use client";
+
 import { ThemeProvider, createTheme } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import moment from "moment";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
@@ -12,7 +15,7 @@ import { Id, toast } from "react-toastify";
 import { EventT } from "../../../../../pageFragments/EventsGrid";
 import Input from "../Input";
 import "./index.css";
-import { redirect, useRouter } from "next/navigation";
+import { updateGeneralErrorToast, updateToast } from "./toastUtils";
 
 type EventFormT = {
   event?: EventT;
@@ -92,49 +95,20 @@ export default function EventForm({ event }: EventFormT) {
       body: formData,
     })
       .then(async (res) => {
-        if (toastId.current) {
-          const responseBody: { message: string; id?: number } =
-            await res.json();
-          let toastType = toast.TYPE.INFO;
-
-          switch (res.status) {
-            case 200:
-              toastType = toast.TYPE.SUCCESS;
-              break;
-            case 500:
-            default:
-              toastType = toast.TYPE.ERROR;
-              break;
-          }
-
-          toast.update(toastId.current, {
-            type: toastType,
-            render: responseBody.message,
-            autoClose: 5000,
-            isLoading: false,
-          });
-
-          toast.onChange((payload) => {
-            if (payload.status === "removed" && payload.id == toastId.current) {
-              if (payload.type === toast.TYPE.SUCCESS) {
-                router.push(`/committee/events/${responseBody.id}`);
-              }
-              setBlockSubmit(false);
-            }
-          });
-        }
+        const responseBody: { message: string; id?: number } = await res.json();
+        updateToast({
+          responseBody,
+          status: res.status,
+          redirectUrl: `/committee/events/${responseBody.id}`,
+          ref: toastId,
+          router: router,
+          setBlockSubmit,
+        });
       })
       .catch((e) => {
         console.error(e);
 
-        if (toastId.current) {
-          toast.update(toastId.current, {
-            type: toast.TYPE.ERROR,
-            render: "Something went wrong",
-            autoClose: 5000,
-            isLoading: false,
-          });
-        }
+        updateGeneralErrorToast(toastId);
       });
   };
 
@@ -151,48 +125,20 @@ export default function EventForm({ event }: EventFormT) {
       body: formData,
     })
       .then(async (res) => {
-        if (toastId.current) {
-          const responseBody: { message: string } = await res.json();
-          let toastType = toast.TYPE.INFO;
-
-          switch (res.status) {
-            case 200:
-              toastType = toast.TYPE.SUCCESS;
-              break;
-            case 500:
-            default:
-              toastType = toast.TYPE.ERROR;
-              break;
-          }
-
-          toast.update(toastId.current, {
-            type: toastType,
-            render: responseBody.message,
-            autoClose: 5000,
-            isLoading: false,
-          });
-
-          toast.onChange((payload) => {
-            if (payload.status === "removed" && payload.id == toastId.current) {
-              if (payload.type === toast.TYPE.SUCCESS) {
-                router.push(`/committee`);
-              }
-              setBlockSubmit(false);
-            }
-          });
-        }
+        const responseBody: { message: string } = await res.json();
+        updateToast({
+          responseBody,
+          status: res.status,
+          redirectUrl: `/committee`,
+          ref: toastId,
+          router: router,
+          setBlockSubmit,
+        });
       })
       .catch((e) => {
         console.error(e);
 
-        if (toastId.current) {
-          toast.update(toastId.current, {
-            type: toast.TYPE.ERROR,
-            render: "Something went wrong",
-            autoClose: 5000,
-            isLoading: false,
-          });
-        }
+        updateGeneralErrorToast(toastId);
       });
   };
 
@@ -250,7 +196,7 @@ export default function EventForm({ event }: EventFormT) {
               <Controller
                 name="end"
                 control={control}
-                defaultValue={event?.start}
+                defaultValue={event?.end}
                 rules={{ required: true }}
                 render={({ field }) => (
                   <DateTimePicker

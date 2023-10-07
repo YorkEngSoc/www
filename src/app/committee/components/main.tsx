@@ -1,13 +1,17 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import TabLayout from "./TabLayout";
 import TabItem from "./TabItem";
 import EventsTab from "./EventsTab";
 
-export default function MainCommitte() {
-  const { data: session } = useSession();
+type MainCommitteeT = {
+  session: boolean;
+  eventsTab: React.ReactNode;
+};
+
+export default function MainCommitte({ session, eventsTab }: MainCommitteeT) {
   const tabs = ["Events", "Committee"];
   const [activeTab, setActiveTab] = useState<string>(tabs[0]);
 
@@ -20,7 +24,7 @@ export default function MainCommitte() {
           setActiveTab={setActiveTab}
         >
           <TabItem activeTab={activeTab} tabName={tabs[0]}>
-            <EventsTab />
+            {eventsTab}
           </TabItem>
           <TabItem activeTab={activeTab} tabName={tabs[1]}>
             <div className="text-white">{tabs[1]}</div>

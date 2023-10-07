@@ -40,6 +40,14 @@ export default function EventsGrid({ loading, data, isAdmin }: EventsGridT) {
             <LoadingGrid />
           ) : (
             <>
+              {isAdmin && (
+                <Link
+                  href="/committee/events/new"
+                  className="p-2 text-white bg-dodger-blue-500 rounded-lg mx-auto my-auto"
+                >
+                  Create new event
+                </Link>
+              )}
               {events?.map((event, i) => (
                 <>
                   <div className="px-2">

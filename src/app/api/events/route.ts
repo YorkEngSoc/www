@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
     if (eventString) event = JSON.parse(eventString);
 
     if (event) {
+      const initialId = event.id;
       const cookiesStore = cookies();
       const supabase = createRouteHandlerClient(
         {
@@ -130,8 +131,8 @@ export async function POST(req: NextRequest) {
 
       return new Response(
         JSON.stringify({
-          message: `Successfully ${event?.id ? "updated" : "created"} event`,
-          id: event?.id,
+          message: `Successfully ${initialId ? "updated" : "created"} event`,
+          id: event.id,
         }),
         {
           status: 200,
