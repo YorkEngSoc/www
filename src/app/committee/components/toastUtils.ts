@@ -8,7 +8,7 @@ type UpdateToastT = {
     id?: number;
   };
   status: number;
-  redirectUrl: string;
+  redirectUrl?: string;
   setBlockSubmit: Dispatch<SetStateAction<boolean>>;
   ref: MutableRefObject<Id | null>;
   router: AppRouterInstance;
@@ -45,7 +45,8 @@ export function updateToast({
     toast.onChange((payload) => {
       if (payload.status === "removed" && payload.id == ref.current) {
         if (payload.type === toast.TYPE.SUCCESS) {
-          router.push(redirectUrl);
+          if (redirectUrl) router.push(redirectUrl);
+          else router.refresh();
         }
         setBlockSubmit(false);
       }
@@ -53,13 +54,24 @@ export function updateToast({
   }
 }
 
-export function updateGeneralErrorToast(ref: MutableRefObject<Id | null>) {
+export function updateGeneralErrorToast(
+  ref: MutableRefObject<Id | null>,
+  setBlockSubmit: Dispatch<SetStateAction<boolean>>
+) {
   if (ref.current) {
     toast.update(ref.current, {
       type: toast.TYPE.ERROR,
       render: "Something went wrong",
       autoClose: 5000,
       isLoading: false,
+    });
+
+    toast.onChange((payload) => {
+      if (payload.status === "removed" && payload.id == ref.current) {
+        if (payload.type === toast.TYPE.ERROR) {
+          setBlockSubmit(false);
+        }
+      }
     });
   }
 }

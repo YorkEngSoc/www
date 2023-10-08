@@ -88,3 +88,8 @@ html {
     @apply bg-[#5865F2] border-[#5865F2];
   }
 }
+
+/* Text input */
+.text-input {
+  @apply w-2/3 p-2 text-lg bg-zinc-800 rounded-lg border-2 border-zinc-600 mb-2;
+}

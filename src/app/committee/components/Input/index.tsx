@@ -1,17 +1,23 @@
-import { FieldError, UseFormRegister } from "react-hook-form";
-import { InputsT } from "../EventForm";
+import { HTMLInputTypeAttribute } from "react";
+import {
+  FieldError,
+  FieldValues,
+  Path,
+  UseFormRegister,
+} from "react-hook-form";
 
-type InputT = {
+type InputT<T extends FieldValues> = {
   defaultValue?: string;
-  register: UseFormRegister<InputsT>;
-  name: keyof InputsT;
+  register: UseFormRegister<T>;
+  name: Path<T>;
   required?: boolean;
   displayName: string;
   error: FieldError | undefined;
   ignoreMargin?: boolean;
+  type?: HTMLInputTypeAttribute;
 };
 
-export default function Input({
+export default function Input<T extends FieldValues>({
   defaultValue,
   register,
   required,
@@ -19,7 +25,8 @@ export default function Input({
   displayName,
   error,
   ignoreMargin,
-}: InputT) {
+  type,
+}: InputT<T>) {
   return (
     <>
       <label
@@ -28,6 +35,7 @@ export default function Input({
         {displayName}
       </label>
       <input
+        type={type}
         defaultValue={defaultValue}
         {...register(name, { required })}
         className="text-input"

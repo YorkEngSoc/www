@@ -1,10 +1,11 @@
 import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { EventT } from "../../pageFragments/EventsGrid";
+import { CommitteeMemberT } from "../../pageFragments/Committee";
 import { cookies } from "next/headers";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import sharp from "sharp";
+import { EventT } from "../../pageFragments/EventsGrid";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -12,13 +13,18 @@ export async function POST(req: NextRequest) {
     const data = await req.formData();
 
     const image = data.get("image") as File | null;
+    const memberString = data.get("member") as string | null;
     const eventString = data.get("event") as string | null;
 
-    let event: EventT | undefined = undefined;
-    if (eventString) event = JSON.parse(eventString);
+    const supabaseEndpoint = memberString ? "committee" : "events";
+    const messageWord = memberString ? "member" : "event";
 
-    if (event) {
-      const initialId = event.id;
+    let inputData: EventT | CommitteeMemberT | undefined = undefined;
+    if (memberString) inputData = JSON.parse(memberString);
+    if (eventString) inputData = JSON.parse(eventString);
+
+    if (inputData) {
+      const initialId = inputData.id;
       const cookiesStore = cookies();
       const supabase = createRouteHandlerClient(
         {
@@ -38,12 +44,12 @@ export async function POST(req: NextRequest) {
       if (image) {
         const sanitisedFileName = image.name.replaceAll(/[^a-zA-Z0-9.]+/gi, "");
 
-        if (event.image && typeof event.image === "string") {
+        if (inputData.image && typeof inputData.image === "string") {
           const { data, error } = await supabase.storage
-            .from("events")
-            .remove([event.image]);
+            .from(supabaseEndpoint)
+            .remove([inputData.image]);
 
-          if (error) {
+          if (error || !data) {
             console.error(error);
 
             return new Response("Could not delete previous image", {
@@ -52,13 +58,13 @@ export async function POST(req: NextRequest) {
           }
         }
 
-        event.image = sanitisedFileName;
+        inputData.image = sanitisedFileName;
 
         const sharpImage = sharp(await image.arrayBuffer());
         const { height, width, format } = await sharpImage.metadata();
 
-        event.image_w = width;
-        event.image_h = height;
+        inputData.image_w = width ?? 0;
+        inputData.image_h = height ?? 0;
 
         const sigma = 1 + Math.max(width ?? 0, height ?? 0) / 40;
         const base64Image = (
@@ -68,10 +74,10 @@ export async function POST(req: NextRequest) {
             .toBuffer()
         ).toString("base64");
 
-        event.placeholder_image = `data:image/${format};base64,${base64Image}`;
+        inputData.placeholder_image = `data:image/${format};base64,${base64Image}`;
 
         const { error } = await supabase.storage
-          .from("events")
+          .from(supabaseEndpoint)
           .upload(sanitisedFileName, image, {
             cacheControl: "3600",
             upsert: false,
@@ -89,19 +95,15 @@ export async function POST(req: NextRequest) {
         }
       }
 
-      if (event.body.length === 0) event.body = event.short_description;
-
-      if (event.id) {
-        const { error } = await supabase
-          .from("events")
-          .update(event)
-          .eq("id", event.id);
+      if (inputData.id) {
+        const { error, data } = await supabase
+          .from(supabaseEndpoint)
+          .update(inputData)
+          .eq("id", inputData.id);
 
         if (error) {
-          console.error(error);
-
           return new Response(
-            JSON.stringify({ message: "Could not update event" }),
+            JSON.stringify({ message: `Could not update ${messageWord}` }),
             {
               status: 500,
             }
@@ -109,19 +111,19 @@ export async function POST(req: NextRequest) {
         }
       } else {
         const { error, data } = await supabase
-          .from("events")
-          .insert(event)
+          .from(supabaseEndpoint)
+          .insert(inputData)
           .select();
 
         if (data && data[0]) {
-          event.id = data[0].id;
+          inputData.id = data[0].id;
         }
 
         if (error) {
           console.error(error);
 
           return new Response(
-            JSON.stringify({ message: "Could not create event" }),
+            JSON.stringify({ message: `Could not create ${messageWord}` }),
             {
               status: 500,
             }
@@ -131,8 +133,10 @@ export async function POST(req: NextRequest) {
 
       return new Response(
         JSON.stringify({
-          message: `Successfully ${initialId ? "updated" : "created"} event`,
-          id: event.id,
+          message: `Successfully ${
+            initialId ? "updated" : "created"
+          } ${messageWord}`,
+          id: inputData.id,
         }),
         {
           status: 200,
@@ -150,9 +154,17 @@ export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (session) {
     const data = await req.formData();
+    const memberId = data.get("memberId") as string | null;
     const eventId = data.get("eventId") as string | null;
 
-    if (eventId) {
+    const supabaseEndpoint = memberId ? "committee" : "events";
+    const messageWord = memberId ? "member" : "event";
+
+    let id: string | undefined = undefined;
+    if (memberId) id = memberId;
+    if (eventId) id = eventId;
+
+    if (id) {
       const cookiesStore = cookies();
       const supabase = createRouteHandlerClient(
         {
@@ -169,42 +181,47 @@ export async function DELETE(req: NextRequest) {
         }
       );
 
-      const { data: events, error } = await supabase
-        .from("events")
+      const { data, error } = await supabase
+        .from(supabaseEndpoint)
         .delete()
-        .eq("id", eventId)
+        .eq("id", id)
         .select();
 
-      if (error || !events || events.length === 0) {
+      if (error || !data || data.length === 0) {
         console.error(error);
 
         return new Response(
-          JSON.stringify({ message: "Could not delete event" }),
+          JSON.stringify({ message: `Could not delete ${messageWord}` }),
           {
             status: 500,
           }
         );
       }
 
-      const event = events[0] as EventT;
+      const entity = data[0] as CommitteeMemberT | EventT;
 
-      if (event.image) {
+      if (entity.image) {
         const { data, error } = await supabase.storage
-          .from("events")
-          .remove([event.image as string]);
+          .from(supabaseEndpoint)
+          .remove([entity.image as string]);
 
         if (error) {
           console.error(error);
 
-          return new Response("Could not delete event image", {
-            status: 500,
-          });
+          return new Response(
+            JSON.stringify({
+              message: `Could not delete ${messageWord} image`,
+            }),
+            {
+              status: 500,
+            }
+          );
         }
       }
 
       return new Response(
         JSON.stringify({
-          message: "Successfully deleted event",
+          message: `Successfully deleted ${messageWord}`,
         }),
         {
           status: 200,

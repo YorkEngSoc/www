@@ -9,9 +9,14 @@ import EventsTab from "./EventsTab";
 type MainCommitteeT = {
   session: boolean;
   eventsTab: React.ReactNode;
+  committeeTab: React.ReactNode;
 };
 
-export default function MainCommitte({ session, eventsTab }: MainCommitteeT) {
+export default function MainCommitte({
+  session,
+  eventsTab,
+  committeeTab,
+}: MainCommitteeT) {
   const tabs = ["Events", "Committee"];
   const [activeTab, setActiveTab] = useState<string>(tabs[0]);
 
@@ -27,7 +32,7 @@ export default function MainCommitte({ session, eventsTab }: MainCommitteeT) {
             {eventsTab}
           </TabItem>
           <TabItem activeTab={activeTab} tabName={tabs[1]}>
-            <div className="text-white">{tabs[1]}</div>
+            {committeeTab}
           </TabItem>
         </TabLayout>
       ) : (

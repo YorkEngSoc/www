@@ -1,14 +1,15 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { getServerSession } from "next-auth";
+import { authOptions } from "../../../api/auth/[...nextauth]/route";
 import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { CommitteeMemberT } from "../../../pageFragments/Committee";
 import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
+import MemberForm from "./components/MemberForm";
 import "react-toastify/dist/ReactToastify.min.css";
-import { authOptions } from "../../../api/auth/[...nextauth]/route";
-import { EventT } from "../../../pageFragments/EventsGrid";
-import EventForm from "./components/EventForm";
 
-export default async function AdminEvent({
+
+export default async function AdminMember({
   params,
 }: {
   params: { id: string };
@@ -16,17 +17,6 @@ export default async function AdminEvent({
   const session = await getServerSession(authOptions);
 
   if (session) {
-    if (params.id === "1") {
-      return (
-        <main className="flex flex-col pt-20 px-10 min-h-[80vh]">
-          <h1 className="text-6xl font-extrabold text-red-500 my-auto">
-            You cannot modify the weekly labs event. Please get in touch with
-            the website admin.
-          </h1>
-        </main>
-      );
-    }
-
     const { supabaseAccessToken } = session;
     const cookiesStore = cookies();
     const supabase = createServerComponentClient(
@@ -42,11 +32,11 @@ export default async function AdminEvent({
       }
     );
 
-    let event: EventT | undefined = undefined;
+    let member: CommitteeMemberT | undefined = undefined;
 
     if (params.id !== "new") {
-      const { data: events, error } = await supabase
-        .from("events")
+      const { data: members, error } = await supabase
+        .from("committee")
         .select()
         .eq("id", params.id);
 
@@ -54,7 +44,7 @@ export default async function AdminEvent({
         console.error(error);
       }
 
-      if (events && events.length > 0) event = events[0];
+      if (members && members.length > 0) member = members[0];
       else redirect("/committee");
     }
 
@@ -72,7 +62,7 @@ export default async function AdminEvent({
           pauseOnHover
           theme="dark"
         />
-        <EventForm event={event} />
+        <MemberForm member={member} />
       </main>
     );
   }

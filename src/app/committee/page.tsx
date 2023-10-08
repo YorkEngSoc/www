@@ -3,6 +3,7 @@ import MainCommitte from "./components/main";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import EventsTab from "./components/EventsTab";
+import CommitteeTab from "./components/CommitteeTab";
 
 export default async function Committee() {
   const session = await getServerSession(authOptions);
@@ -12,6 +13,7 @@ export default async function Committee() {
       <MainCommitte
         session={session ? true : false}
         eventsTab={<EventsTab />}
+        committeeTab={<CommitteeTab />}
       />
     </main>
   );
