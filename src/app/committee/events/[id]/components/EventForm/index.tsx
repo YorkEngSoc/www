@@ -2,9 +2,10 @@
 
 import { ThemeProvider, createTheme } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import moment from "moment";
-import { useContext, useEffect } from "react";
+// import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
+// import moment from "moment";
+import { DateTime } from "luxon";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import "react-datetime-picker/dist/DateTimePicker.css";
@@ -40,7 +41,7 @@ export default function EventForm({ event }: EventFormT) {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <LocalizationProvider dateAdapter={AdapterMoment}>
+      <LocalizationProvider dateAdapter={AdapterLuxon}>
         <Form
           endpoint="events"
           form={form}
@@ -75,9 +76,14 @@ export default function EventForm({ event }: EventFormT) {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <DateTimePicker
-                      value={field.value ? moment(field.value) : moment()}
+                      value={
+                        field.value
+                          ? DateTime.fromISO(field.value)
+                          : DateTime.now()
+                      }
                       onChange={(time) => {
-                        if (time) field.onChange(time.utc().format());
+                        if (time)
+                          field.onChange(time.toString());
                       }}
                       className="w-max"
                     />
@@ -100,9 +106,14 @@ export default function EventForm({ event }: EventFormT) {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <DateTimePicker
-                      value={field.value ? moment(field.value) : moment()}
+                      value={
+                        field.value
+                          ? DateTime.fromISO(field.value)
+                          : DateTime.now()
+                      }
                       onChange={(time) => {
-                        if (time) field.onChange(time.utc().format());
+                        if (time)
+                          field.onChange(time.toString());
                       }}
                       className="w-max"
                     />

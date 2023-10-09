@@ -74,7 +74,7 @@ export default function Form<T extends FormInputI>({
     };
   }, [data]);
 
-  const onSubmit: SubmitHandler<FieldValues> = (inputData) => {
+  const onSubmit: SubmitHandler<T> = (inputData) => {
     const formData = new FormData();
     if (image) formData.append("image", image);
 
@@ -119,7 +119,7 @@ export default function Form<T extends FormInputI>({
       });
   };
 
-  const onDelete: SubmitHandler<FieldValues> = () => {
+  const onDelete: SubmitHandler<T> = () => {
     const formData = new FormData();
     const dataName = endpoint === "events" ? "eventId" : "memberId";
     formData.append(dataName, data?.id.toString() ?? "-1");
