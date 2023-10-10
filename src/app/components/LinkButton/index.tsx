@@ -1,5 +1,4 @@
 import Link from "next/link";
-import lexend from "../../pageFragments/lexend";
 import { HTMLAttributeAnchorTarget, HTMLAttributeReferrerPolicy } from "react";
 
 type LinkButtonT = {
