@@ -9,6 +9,31 @@ import pink from "../../pageFragments/EventsGrid/assets/pink.jpg";
 import Loading from "./loading";
 import { DateTime } from "luxon";
 
+function buildCalendarUrl(event: EventT) {
+  const url = new URL("https://calendar.google.com/calendar/r/eventedit");
+  const ukStartTime = DateTime.fromISO(event.start)
+    .setZone("Europe/London")
+    .toString();
+  const ukEndTime = DateTime.fromISO(event.end)
+    .setZone("Europe/London")
+    .toString();
+  const start = ukStartTime.replaceAll(/([-:.])+/g, "").split("+")[0];
+  const end = ukEndTime.replaceAll(/([-:.])+/g, "").split("+")[0];
+
+  url.searchParams.set("action", "TEMPLATE");
+  url.searchParams.set("text", event.title);
+  url.searchParams.set(
+    "dates",
+    `${start.slice(0, start.length - 3)}/${end.slice(0, end.length - 3)}`
+  );
+  url.searchParams.set("ctz", "Europe/London");
+  url.searchParams.set("details", event.short_description);
+  // TODO: Location isn't picked up on mobile, need to investigate
+  url.searchParams.set("location", event.location);
+
+  return url.toString();
+}
+
 export default async function Event({ params }: { params: { id: string } }) {
   try {
     const cookieStore = cookies();
@@ -95,7 +120,9 @@ export default async function Event({ params }: { params: { id: string } }) {
                 </p>
                 {event.id !== 1 && (
                   <LinkButton
-                    href={`/api/calendar/${event.id}`}
+                    href={buildCalendarUrl(event)}
+                    target="_blank"
+                    referrerPolicy="no-referrer"
                     tw="w-full block text-center bg-dodger-blue-500 border-dodger-blue-500"
                   >
                     Add to calendar
