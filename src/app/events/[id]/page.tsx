@@ -10,7 +10,7 @@ import Loading from "./loading";
 import { DateTime } from "luxon";
 
 function buildCalendarUrl(event: EventT) {
-  const url = new URL("https://calendar.google.com/calendar/r/eventedit");
+  const url = new URL("https://calendar.google.com/calendar/render");
   const ukStartTime = DateTime.fromISO(event.start)
     .setZone("Europe/London")
     .toString();
