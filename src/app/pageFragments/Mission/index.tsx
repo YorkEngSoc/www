@@ -3,9 +3,9 @@ import "./index.css";
 
 export default function Mission() {
   return (
-    <div className="h-[75vh] flex flex-col 2xl:pt-40 xl:pt-28 lg:pt-14 justify-center relative">
+    <div className="h-[75vh] flex flex-col 2xl:pt-40 xl:pt-32 h-xl:pt-44 h-xl-low:pt-56 lg:pt-14 justify-center relative">
       <SectionTitle title="Our Mission" />
-      <p className="xl:max-w-[50%] xl:pl-10 px-2 text-white text-xl md:text-3xl lg:text-4xl py-10">
+      <p className="xl:max-w-[50%] lg:pl-10 px-2 text-white text-xl md:text-3xl lg:text-4xl py-10">
         Empowering our members to drive innovation, shape the future, and excel
         in their careers by fostering a dynamic community of learning,
         mentorship and transformative experiences.

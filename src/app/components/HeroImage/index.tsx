@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import space from "./assets/space.jpg";
 import bridge from "./assets/bridge.jpg";

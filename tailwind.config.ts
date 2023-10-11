@@ -33,6 +33,8 @@ const config: Config = {
       },
       screens: {
         "3xl": "2560px",
+        "h-xl-low": { raw: "(max-height: 600px) and (min-width: 1280px)" },
+        "h-xl": { raw: "(min-height: 600px) and (max-height: 750px) and (min-width: 1280px)" },
       },
     },
   },
