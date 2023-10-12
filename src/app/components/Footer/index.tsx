@@ -5,6 +5,7 @@ import Link from "next/link";
 import logo from "../sharedAssets/logo.png";
 import github from "./assets/github.png";
 import instagram from "./assets/instagram.png";
+import linkedin from "./assets/linkedin.png";
 import "./index.css";
 
 export default function Footer() {
@@ -30,17 +31,39 @@ export default function Footer() {
       </div>
       <div className="flex flex-row pt-2 md:pt-0 w-full md:w-auto justify-between md:justify-normal">
         <DiscordButton tw="inline-block w-1/2 md:w-max mr-4 hover:scale-100 hover:translate-y-0 p-1 md:p-2" />
-        <LinkButton href="#" tw="aspect-square inline-block p-1 md:p-2 mr-4 bg-white hover:scale-100 hover:translate-y-0">
+        <LinkButton
+          href="https://instagram.com/yorkengsoc"
+          target="_blank"
+          referrerPolicy="no-referrer"
+          tw="aspect-square inline-block p-1 md:p-2 mr-4 bg-white hover:scale-100 hover:translate-y-0"
+        >
           <Image
             src={instagram}
             alt="Instagram logo."
             className="object-contain w-7 h-7"
           />
         </LinkButton>
-        <LinkButton href="#" tw="aspect-square h-max inline-block p-1 md:p-2 bg-white hover:scale-100 hover:translate-y-0">
+        <LinkButton
+          href="https://github.com/EngYork"
+          target="_blank"
+          referrerPolicy="no-referrer"
+          tw="aspect-square h-max inline-block p-1 md:p-2 mr-4 bg-white hover:scale-100 hover:translate-y-0"
+        >
           <Image
             src={github}
             alt="Github logo."
+            className="object-contain w-7 h-7"
+          />
+        </LinkButton>
+        <LinkButton
+          href="https://www.linkedin.com/company/yorkengsoc/"
+          target="_blank"
+          referrerPolicy="no-referrer"
+          tw="aspect-square h-max inline-block p-1 md:p-2 bg-white hover:scale-100 hover:translate-y-0"
+        >
+          <Image
+            src={linkedin}
+            alt="Linkedin logo."
             className="object-contain w-7 h-7"
           />
         </LinkButton>

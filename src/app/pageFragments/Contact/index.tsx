@@ -1,4 +1,5 @@
 import SectionTitle from "@components/SectionTitle";
+import Link from "next/link";
 
 export default function Contact() {
   return (
@@ -8,7 +9,14 @@ export default function Contact() {
         <div className="flex flex-col pt-4 text-white px-2 lg:pl-10 md:pr-0">
           <p className="text-xl sm:text-3xl lg:text-4xl">
             Feel free to contact us, we would love to hear from you, and discuss
-            any partnerships.
+            any partnerships.<br></br>
+            <br></br>
+            <Link
+              href="mailto:engsoc@yusu.org"
+              className="text-dodger-blue-500 font-extrabold"
+            >
+              engsoc@yusu.org
+            </Link>
           </p>
           <p className="my-auto pt-4 lg:pt-2 xl:pt-0 text-xl sm:text-3xl lg:text-4xl xl:text-5xl">
             University of York
