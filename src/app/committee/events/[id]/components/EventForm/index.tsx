@@ -20,7 +20,7 @@ type EventFormT = {
 
 type EventInputsT = Omit<
   EventT,
-  "placeholder_image" | "image" | "id" | "image_w" | "image_h"
+  "placeholder_image" | "image" | "id" | "image_w" | "image_h" | "visible"
 > & {
   image: FileList;
 };
@@ -82,8 +82,7 @@ export default function EventForm({ event }: EventFormT) {
                           : DateTime.now()
                       }
                       onChange={(time) => {
-                        if (time)
-                          field.onChange(time.toString());
+                        if (time) field.onChange(time.toString());
                       }}
                       className="w-max"
                     />
@@ -91,36 +90,6 @@ export default function EventForm({ event }: EventFormT) {
                 />
               </div>
               {errors.start && (
-                <span className="text-red-500 text-xl font-bold mb-2">
-                  This field is required
-                </span>
-              )}
-              <label className="text-4xl font-extrabold mb-2 mt-10">
-                End date and time
-              </label>
-              <div className="mb-2">
-                <Controller
-                  name="end"
-                  control={control}
-                  defaultValue={event?.end}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <DateTimePicker
-                      value={
-                        field.value
-                          ? DateTime.fromISO(field.value)
-                          : DateTime.now()
-                      }
-                      onChange={(time) => {
-                        if (time)
-                          field.onChange(time.toString());
-                      }}
-                      className="w-max"
-                    />
-                  )}
-                />
-              </div>
-              {errors.end && (
                 <span className="text-red-500 text-xl font-bold mb-2">
                   This field is required
                 </span>

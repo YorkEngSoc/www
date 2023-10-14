@@ -14,18 +14,12 @@ function buildCalendarUrl(event: EventT) {
   const ukStartTime = DateTime.fromISO(event.start)
     .setZone("Europe/London")
     .toString();
-  const ukEndTime = DateTime.fromISO(event.end)
-    .setZone("Europe/London")
-    .toString();
-  const start = ukStartTime.replaceAll(/([-:.])+/g, "").split("+")[0];
-  const end = ukEndTime.replaceAll(/([-:.])+/g, "").split("+")[0];
+  let start = ukStartTime.replaceAll(/([-:.])+/g, "").split("+")[0];
+  start = start.slice(0, start.length - 3);
 
   url.searchParams.set("action", "TEMPLATE");
-  url.searchParams.set("text", event.title);
-  url.searchParams.set(
-    "dates",
-    `${start.slice(0, start.length - 3)}/${end.slice(0, end.length - 3)}`
-  );
+  url.searchParams.set("text", `${event.title} - EngSoc`);
+  url.searchParams.set("dates", `${start}/${start}`);
   url.searchParams.set("ctz", "Europe/London");
   url.searchParams.set("details", event.short_description);
   // TODO: Location isn't picked up on mobile, need to investigate
@@ -112,21 +106,17 @@ export default async function Event({ params }: { params: { id: string } }) {
                     ? DateTime.fromISO(event.start).toFormat("dd/MM/yyyy HH:mm")
                     : "Every Wednesday 14:30"}
                 </p>
-                <p className="text-xl">
-                  End:{" "}
-                  {event.end
-                    ? DateTime.fromISO(event.end).toFormat("dd/MM/yyyy HH:mm")
-                    : "17:00"}
-                </p>
                 {event.id !== 1 && (
-                  <LinkButton
-                    href={buildCalendarUrl(event)}
-                    target="_blank"
-                    referrerPolicy="no-referrer"
-                    tw="w-full block text-center bg-dodger-blue-500 border-dodger-blue-500"
-                  >
-                    Add to calendar
-                  </LinkButton>
+                  <div className="pt-4">
+                    <LinkButton
+                      href={buildCalendarUrl(event)}
+                      target="_blank"
+                      referrerPolicy="no-referrer"
+                      tw="w-full block text-center bg-dodger-blue-500 border-dodger-blue-500"
+                    >
+                      Add to calendar
+                    </LinkButton>
+                  </div>
                 )}
               </div>
               <div className="pt-4 md:pt-10">

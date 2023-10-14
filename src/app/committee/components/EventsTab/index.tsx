@@ -24,7 +24,11 @@ export default async function EventsTab() {
       }
     );
 
-    const { data, error } = await supabase.from("events").select().neq("id", 1);
+    const { data, error } = await supabase
+      .from("events")
+      .select()
+      .neq("id", 1)
+      .eq("visible", true);
 
     if (error) console.error(error);
 

@@ -14,7 +14,10 @@ export default async function Events() {
       cookies: () => cookieStore,
     });
 
-    let { data: events } = (await supabase.from("events").select()) as {
+    let { data: events } = (await supabase
+      .from("events")
+      .select()
+      .eq("visible", true)) as {
       data: EventT[] | null;
     };
 

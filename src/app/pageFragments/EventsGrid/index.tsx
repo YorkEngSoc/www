@@ -4,11 +4,11 @@ import LocationIcon from "@components/LocationIcon";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import pink from "./assets/pink.jpg";
+import { DateTime } from "luxon";
 
 export type EventT = {
   id: number;
   start: string;
-  end: string;
   location: string;
   title: string;
   short_description: string;
@@ -18,6 +18,7 @@ export type EventT = {
   placeholder_image: string;
   image_w?: number;
   image_h?: number;
+  visible: boolean;
 };
 
 type EventsGridT = {
@@ -50,7 +51,7 @@ export default function EventsGrid({ loading, data, isAdmin }: EventsGridT) {
               )}
               {events?.map((event, i) => (
                 <>
-                  <div className="px-2">
+                  <div className="px-2 flex">
                     <Link
                       href={`${isAdmin ? "/committee" : ""}/events/${event.id}`}
                       className="block text-dodger-blue-500 rounded-xl relative w-3/4 mx-auto border-2 border-zinc-700 bg-zinc-800 event-shard"
@@ -80,13 +81,9 @@ export default function EventsGrid({ loading, data, isAdmin }: EventsGridT) {
                         </h3>
                         <p className="text-dodger-blue-600 py-4 text-sm sm:text-base lg:text-lg">
                           <CalendarIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 inline" />{" "}
-                          {event.start
-                            ? new Date(event.start).toLocaleString()
-                            : "Every Wednesday 14:30"}{" "}
-                          -{" "}
-                          {event.end
-                            ? new Date(event.end).toLocaleString()
-                            : "17:00"}
+                          {DateTime.fromISO(event.start).toFormat(
+                            "dd/MM/yyyy HH:mm"
+                          )}
                         </p>
                         <p className="text-dodger-blue-600 pb-4 text-sm sm:text-base lg:text-lg">
                           <LocationIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 inline" />{" "}
