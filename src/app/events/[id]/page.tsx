@@ -11,9 +11,9 @@ import { DateTime } from "luxon";
 
 function buildCalendarUrl(event: EventT) {
   const url = new URL("https://calendar.google.com/calendar/render");
-  const ukStartTime = DateTime.fromISO(event.start)
-    .setZone("Europe/London")
-    .toString();
+  const ukStartTime = DateTime.fromISO(event.start, {
+    setZone: true,
+  }).toString();
   let start = ukStartTime.replaceAll(/([-:.])+/g, "").split("+")[0];
   start = start.slice(0, start.length - 3);
 
@@ -103,7 +103,9 @@ export default async function Event({ params }: { params: { id: string } }) {
                 <p className="text-xl pt-2">
                   Start:{" "}
                   {event.start
-                    ? DateTime.fromISO(event.start).toFormat("dd/MM/yyyy HH:mm")
+                    ? DateTime.fromISO(event.start, { setZone: true }).toFormat(
+                        "dd/MM/yyyy HH:mm"
+                      )
                     : "Every Wednesday 14:30"}
                 </p>
                 {event.id !== 1 && (

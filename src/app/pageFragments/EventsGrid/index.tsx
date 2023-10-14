@@ -81,9 +81,9 @@ export default function EventsGrid({ loading, data, isAdmin }: EventsGridT) {
                         </h3>
                         <p className="text-dodger-blue-600 py-4 text-sm sm:text-base lg:text-lg">
                           <CalendarIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 inline" />{" "}
-                          {DateTime.fromISO(event.start).toFormat(
-                            "dd/MM/yyyy HH:mm"
-                          )}
+                          {DateTime.fromISO(event.start, {
+                            setZone: true,
+                          }).toFormat("dd/MM/yyyy HH:mm")}
                         </p>
                         <p className="text-dodger-blue-600 pb-4 text-sm sm:text-base lg:text-lg">
                           <LocationIcon tw="w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 inline" />{" "}
