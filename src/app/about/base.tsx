@@ -11,18 +11,14 @@ type AboutBaseT = {
 export default function AboutBase({ children }: AboutBaseT) {
   return (
     <main>
-      <Image
-        src={header}
-        alt="Sci-Fi artwork"
-        className="mx-auto"
-      />
+      <Image src={header} alt="Sci-Fi artwork" className="mx-auto" />
       <SectionTitle title="About Us" tw="pt-6" />
       <p className="text-xl sm:text-3xl lg:text-4xl px-2 lg:px-10 pt-2 text-white">
-        Since 1900, we have been empowering our members to drive innovation,
-        shape the future, and excel in their careers by fostering a dynamic
-        community of learning, mentorship and transformative experiences. Many
-        of our alumni have gone on to have very successful international
-        careers.
+        Ever since we were founded, we have been empowering our members to drive
+        innovation, shape the future, and excel in their careers by fostering a
+        dynamic community of learning, mentorship and transformative
+        experiences. Many of our alumni have gone on to have very successful
+        international careers.
       </p>
       <AboutImages />
       {children}
