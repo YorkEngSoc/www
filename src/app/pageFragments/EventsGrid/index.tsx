@@ -1,10 +1,11 @@
 import CalendarIcon from "@components/CalendarIcon";
+import LazyImg from "@components/LazyImg";
 import LoadingGrid from "@components/LoadingGrid";
 import LocationIcon from "@components/LocationIcon";
-import Image, { StaticImageData } from "next/image";
+import { DateTime } from "luxon";
+import { StaticImageData } from "next/image";
 import Link from "next/link";
 import pink from "./assets/pink.jpg";
-import { DateTime } from "luxon";
 
 export type EventT = {
   id: number;
@@ -57,24 +58,20 @@ export default function EventsGrid({ loading, data, isAdmin }: EventsGridT) {
                       className="block text-dodger-blue-500 rounded-xl relative w-3/4 mx-auto border-2 border-zinc-700 bg-zinc-800 event-shard"
                       key={`committe_member_${i}`}
                     >
-                      {typeof event.image === "string" ? (
-                        <Image
-                          src={event.image}
-                          alt={`${event.title} brochure image.`}
-                          className="w-full aspect-square object-center object-cover event-gradient rounded-t-[calc(0.75rem_-_2px)]"
-                          placeholder="blur"
-                          blurDataURL={event.placeholder_image}
-                          width={event.image_w}
-                          height={event.image_h}
-                        />
-                      ) : (
-                        <Image
-                          src={event.image}
-                          alt={`${event.title} brochure image.`}
-                          className="w-full aspect-square object-center object-cover event-gradient rounded-t-[calc(0.75rem_-_2px)]"
-                          placeholder="blur"
-                        />
-                      )}
+                      <LazyImg
+                        src={
+                          typeof event.image === "string"
+                            ? event.image
+                            : event.image.src
+                        }
+                        placeholder={
+                          typeof event.image === "string"
+                            ? event.placeholder_image
+                            : event.image.blurDataURL ?? ""
+                        }
+                        alt={`${event.title} brochure image.`}
+                        tw="w-full aspect-square object-center object-cover event-gradient rounded-t-[calc(0.75rem_-_2px)]"
+                      />
                       <div className="flex flex-col p-4 text-left">
                         <h3 className="text-dodger-blue-500 font-extrabold text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                           {event.title}

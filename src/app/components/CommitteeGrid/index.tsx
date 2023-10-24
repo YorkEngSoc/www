@@ -2,6 +2,7 @@ import LoadingGrid from "@components/LoadingGrid";
 import Image from "next/image";
 import { CommitteeMemberT } from "../../pageFragments/Committee";
 import Link from "next/link";
+import LazyImg from "@components/LazyImg";
 
 type CommitteeGridT = {
   data?: CommitteeMemberT[] | null;
@@ -53,14 +54,11 @@ export default function CommitteeGrid({
               memberId={isAdmin ? member.id : undefined}
               key={`committe_member_${i}`}
             >
-              <Image
+              <LazyImg
                 src={member.image}
+                placeholder={member.placeholder_image}
                 alt={`${member.name}'s selfie.`}
-                className="w-3/4 mx-auto aspect-square object-center object-cover rounded-xl"
-                width={member.image_w}
-                height={member.image_h}
-                placeholder="blur"
-                blurDataURL={member.placeholder_image}
+                tw="w-3/4 mx-auto aspect-square object-center object-cover rounded-xl"
               />
               <p className="text-center font-extrabold text-4xl pt-2">
                 {member.name}
