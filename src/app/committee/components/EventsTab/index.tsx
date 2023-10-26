@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { authOptions } from "../../../api/auth/[...nextauth]/route";
 import EventsGrid, { EventT } from "../../../pageFragments/EventsGrid";
+import { DateTime } from "luxon";
 
 export default async function EventsTab() {
   const session = await getServerSession(authOptions);
@@ -24,11 +25,19 @@ export default async function EventsTab() {
       }
     );
 
+    const yesterday = DateTime.now().toUTC().minus({ days: 1 }).set({
+      hour: 0,
+      minute: 0,
+      second: 0,
+      millisecond: 0,
+    });
+
     const { data, error } = await supabase
       .from("events")
       .select()
       .neq("id", 1)
-      .eq("visible", true);
+      .eq("visible", true)
+      .gte("start", yesterday);
 
     if (error) console.error(error);
 
