@@ -79,7 +79,7 @@ export default async function Event({ params }: { params: { id: string } }) {
                 />
               )}
               <div className="absolute w-full h-full top-0 left-0 bg-dodger-blue-950 bg-opacity-40 event-gradient" />
-              <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-extrabold text-4xl sm:text-5xl lg:text-8xl w-max">
+              <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-extrabold text-4xl sm:text-5xl lg:text-8xl text-center">
                 {event.title}
               </h1>
             </div>
