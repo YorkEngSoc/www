@@ -90,7 +90,7 @@ export default async function Event({ params }: { params: { id: string } }) {
                 What&rsquo;s this event?
               </h2>
               <div
-                className="text-xl lg:text-3xl xl:text-4xl pt-10"
+                className="text-xl lg:text-3xl xl:text-4xl pt-10 pb-2"
                 dangerouslySetInnerHTML={{ __html: event.body }}
               ></div>
             </div>
