@@ -37,7 +37,8 @@ export default async function EventsTab() {
       .select()
       .neq("id", 1)
       .eq("visible", true)
-      .gte("start", yesterday);
+      .gte("start", yesterday)
+      .order("start", { ascending: true });
 
     if (error) console.error(error);
 

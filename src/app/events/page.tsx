@@ -25,7 +25,8 @@ export default async function Events() {
       .from("events")
       .select()
       .eq("visible", true)
-      .gt("start", yesterday)) as {
+      .gt("start", yesterday)
+      .order("start", { ascending: true })) as {
       data: EventT[] | null;
     };
 
