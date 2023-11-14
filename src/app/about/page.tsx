@@ -1,6 +1,5 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@supabase/supabase-js";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
 import Committee, { CommitteeMemberT } from "../pageFragments/Committee";
 import AboutBase from "./base";
 
@@ -11,10 +10,10 @@ export const metadata: Metadata = {
 
 export default async function About() {
   try {
-    const cookieStore = cookies();
-    const supabase = createServerComponentClient({
-      cookies: () => cookieStore,
-    });
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 
     const { data: committee } = (await supabase
       .from("committee")
