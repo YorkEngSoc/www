@@ -29,11 +29,19 @@ type EventsGridT = {
 };
 
 export default function EventsGrid({ loading, data, isAdmin }: EventsGridT) {
-  const events = data?.map((event) => {
-    if (!event.image) event.image = pink;
-
-    return event;
+  const yesterday = DateTime.now().toUTC().minus({ days: 1 }).set({
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
   });
+  const events = data
+    ?.map((event) => {
+      if (!event.image) event.image = pink;
+
+      return event;
+    })
+    .filter((event) => DateTime.fromISO(event.start) > yesterday);
   return (
     <>
       {(events || loading) && (

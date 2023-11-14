@@ -1,8 +1,5 @@
-export const revalidate = 3600;
-export const dynamic = "force-dynamic";
-
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { InferGetServerSidePropsType, Metadata } from "next";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
 import Committee, { CommitteeMemberT } from "../pageFragments/Committee";
 import AboutBase from "./base";

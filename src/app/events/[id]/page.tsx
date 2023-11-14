@@ -1,13 +1,11 @@
 import CalendarIcon from "@components/CalendarIcon";
 import LinkButton from "@components/LinkButton";
 import LocationIcon from "@components/LocationIcon";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClient } from "@supabase/supabase-js";
+import { DateTime } from "luxon";
 import Image from "next/image";
 import { EventT } from "../../pageFragments/EventsGrid";
 import pink from "../../pageFragments/EventsGrid/assets/pink.jpg";
-import Loading from "./loading";
-import { DateTime } from "luxon";
 
 function buildCalendarUrl(event: EventT) {
   const url = new URL("https://calendar.google.com/calendar/render");
@@ -28,12 +26,32 @@ function buildCalendarUrl(event: EventT) {
   return url.toString();
 }
 
+export async function generateStaticParams() {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
+  let { data: events } = (await supabase
+    .from("events")
+    .select()
+    .neq("id", 1)) as {
+    data: EventT[] | null;
+  };
+
+  if (events) {
+    return events.map((ev) => ({
+      id: ev.id.toString(),
+    }));
+  } else return [];
+}
+
 export default async function Event({ params }: { params: { id: string } }) {
   try {
-    const cookieStore = cookies();
-    const supabase = createServerComponentClient({
-      cookies: () => cookieStore,
-    });
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 
     let { data: events } = (await supabase
       .from("events")
@@ -145,6 +163,5 @@ export default async function Event({ params }: { params: { id: string } }) {
     } else throw new Error(`Event ${params.id} does not exist`);
   } catch (e) {
     console.error(e);
-    return <Loading />;
   }
 }

@@ -31,6 +31,19 @@ type FormT<T extends FormInputI> = {
 
 export const FormImageContext = createContext<string | undefined>(undefined);
 
+async function deployToast(res: Promise<boolean>) {
+  if (await res) {
+    fetch("/api/deploy", { method: "POST" }).then(async (res) => {
+      const responseBody: { message: string } = await res.json();
+      if (res.status === 200) {
+        toast.success(responseBody.message);
+      } else {
+        toast.error(responseBody.message);
+      }
+    });
+  } else toast.error("Something went wrong deploying.");
+}
+
 export default function Form<T extends FormInputI>({
   data,
   leftSide,
@@ -72,7 +85,7 @@ export default function Form<T extends FormInputI>({
     return () => {
       ignore = true;
     };
-  }, [data]);
+  }, [data, endpoint, supabase.storage]);
 
   const onSubmit: SubmitHandler<T> = (inputData) => {
     const formData = new FormData();
@@ -97,7 +110,7 @@ export default function Form<T extends FormInputI>({
       method: "POST",
       body: formData,
     })
-      .then(async (res) => {
+      .then<Promise<boolean>>(async (res) => {
         const responseBody: { message: string; id?: number } = await res.json();
         updateToast({
           responseBody,
@@ -112,18 +125,7 @@ export default function Form<T extends FormInputI>({
 
         return new Promise((resolve) => resolve(true));
       })
-      .then(async (res) => {
-        if (await res) {
-          fetch("/api/deploy", { method: "POST" }).then(async (res) => {
-            const responseBody: { message: string } = await res.json();
-            if (res.status === 200) {
-              toast.success(responseBody.message);
-            } else {
-              toast.error(responseBody.message);
-            }
-          });
-        }
-      })
+      .then(deployToast)
       .catch((e) => {
         console.error(e);
 
@@ -146,7 +148,7 @@ export default function Form<T extends FormInputI>({
       method: "DELETE",
       body: formData,
     })
-      .then(async (res) => {
+      .then<Promise<boolean>>(async (res) => {
         const responseBody: { message: string } = await res.json();
         updateToast({
           responseBody,
@@ -156,7 +158,10 @@ export default function Form<T extends FormInputI>({
           router: router,
           setBlockSubmit,
         });
+
+        return new Promise((resolve) => resolve(true));
       })
+      .then(deployToast)
       .catch((e) => {
         console.error(e);
 
