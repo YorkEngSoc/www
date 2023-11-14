@@ -25,15 +25,11 @@ export default async function About() {
     if (committee && committee.length > 0) {
       for (const idx in committee) {
         const member = committee[idx];
-        const { data, error } = await supabase.storage
+        const { data } = supabase.storage
           .from("committee")
-          .createSignedUrl(member.image, 60);
+          .getPublicUrl(member.image);
 
-        if (data && data.signedUrl) member.image = data.signedUrl;
-        else
-          throw new Error(
-            `${member.name}'s image does not exist on bucket: ${error}`
-          );
+        if (data && data.publicUrl) member.image = data.publicUrl;
       }
 
       return (
