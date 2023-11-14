@@ -109,6 +109,20 @@ export default function Form<T extends FormInputI>({
           router: router,
           setBlockSubmit,
         });
+
+        return new Promise((resolve) => resolve(true));
+      })
+      .then(async (res) => {
+        if (await res) {
+          fetch("/api/deploy", { method: "POST" }).then(async (res) => {
+            const responseBody: { message: string } = await res.json();
+            if (res.status === 200) {
+              toast.success(responseBody.message);
+            } else {
+              toast.error(responseBody.message);
+            }
+          });
+        }
       })
       .catch((e) => {
         console.error(e);
