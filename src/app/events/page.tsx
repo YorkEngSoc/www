@@ -1,31 +1,18 @@
-export const dynamic = "force-dynamic";
-
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@supabase/supabase-js";
 import EventsGrid, { EventT } from "../pageFragments/EventsGrid";
 import EventsBase from "./base";
-import { cookies } from "next/headers";
-import React, { useMemo } from "react";
-import { DateTime } from "luxon";
 
 export default async function Events() {
   try {
-    const cookieStore = cookies();
-    const supabase = createServerComponentClient({
-      cookies: () => cookieStore,
-    });
-
-    const yesterday = DateTime.now().toUTC().minus({ days: 1 }).set({
-      hour: 0,
-      minute: 0,
-      second: 0,
-      millisecond: 0,
-    });
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 
     let { data: events } = (await supabase
       .from("events")
       .select()
       .eq("visible", true)
-      .gt("start", yesterday)
       .order("start", { ascending: true })) as {
       data: EventT[] | null;
     };
