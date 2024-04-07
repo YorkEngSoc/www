@@ -11,6 +11,17 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/qfactor",
+        destination:
+          "https://www.eventbrite.co.uk/e/q-factor-2024-tickets-875864072017?aff=ebdsshcopyurl&utm-source=cp&utm-term=listing&utm-campaign=social&utm-medium=discovery&utm-content=attendeeshare",
+        basePath: false,
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
