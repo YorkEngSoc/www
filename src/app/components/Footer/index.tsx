@@ -44,7 +44,7 @@ export default function Footer() {
           />
         </LinkButton>
         <LinkButton
-          href="https://github.com/EngYork"
+          href="https://github.com/YorkEngSoc"
           target="_blank"
           referrerPolicy="no-referrer"
           tw="aspect-square h-max inline-block p-1 md:p-2 mr-4 bg-white hover:scale-100 hover:translate-y-0"
