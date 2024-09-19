@@ -14,9 +14,9 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/qfactor",
+        source: "/calendar",
         destination:
-          "https://www.eventbrite.co.uk/e/q-factor-2024-tickets-875864072017?aff=ebdsshcopyurl&utm-source=cp&utm-term=listing&utm-campaign=social&utm-medium=discovery&utm-content=attendeeshare",
+          "https://calendar.google.com/calendar/u/5?cid=Y181YzM0ZGYwMDUyMWE5MWQ3ZjJlYjgwMWQ2MTRlYmUyODM1YTE4NmM4YTE3ZmVkZTZhZDMyOTliMGU1ZTAyZDI1QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20",
         basePath: false,
         permanent: true,
       },
