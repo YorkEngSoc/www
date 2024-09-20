@@ -26,6 +26,12 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/join",
+        destination: "https://forms.gle/wrYqp8s67dr9Mf8c9",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
