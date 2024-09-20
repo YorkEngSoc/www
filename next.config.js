@@ -20,6 +20,12 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/winter-formal",
+        destination: "https://forms.gle/Re18uLHvQtgnHdEb8",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
