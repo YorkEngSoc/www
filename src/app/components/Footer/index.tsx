@@ -18,7 +18,7 @@ export default function Footer() {
           className="inline mx-auto"
         />
         <span className="text-white pt-2 md:pt-0 md:pl-4 text-sm md:text-base">
-          WebDev{" "}
+          Designed by{" "}
           <Link
             href="https://barillari.me"
             className="text-blue-500 hover:line-through"
@@ -26,6 +26,15 @@ export default function Footer() {
             target="_blank">
             @Giuseppe Barillari
           </Link>
+          {""}, Maintained by{" "}
+          <Link
+            href="https://hboyd.co.uk"
+            className="text-blue-500 hover:line-through"
+            referrerPolicy="no-referrer"
+            target="_blank">
+             @Harry Boyd
+          </Link>
+          .
         </span>
       </div>
       <div className="flex flex-row pt-2 md:pt-0 w-full md:w-auto justify-between md:justify-normal">

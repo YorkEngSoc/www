@@ -10,9 +10,9 @@ need making to the website.
 
 - [x] The email needs changing to @yorksu.org.
 - [ ] Committee members list needs updating.
-- [ ] The membership form needs updating.
+- [x] The membership form needs updating.
 - [ ] Update the join forms into one button.
 - [ ] Rewrite the about us page to reflect our 2024 goals.
 - [ ] Fix the events page to show the correct events, probably by embedding our
       google calendar.
-- [ ] Add my name to the webdev footer.
+- [x] Add my name to the webdev footer.
