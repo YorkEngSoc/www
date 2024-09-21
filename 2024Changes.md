@@ -8,7 +8,7 @@ need making to the website.
 
 ## Changes
 
-- [ ] THe email needs changing to @yorksu.org.
+- [x] The email needs changing to @yorksu.org.
 - [ ] Committee members list needs updating.
 - [ ] The membership form needs updating.
 - [ ] Update the join forms into one button.
