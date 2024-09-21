@@ -1,4 +1,5 @@
 import SectionTitle from "@components/SectionTitle";
+import Schedule from "./../pageFragments/Schedule";
 import "./index.css";
 
 export default function Events() {
@@ -10,6 +11,7 @@ export default function Events() {
           tw="pt-20 text-white text-center my-auto"
         />
       </div>
+      <Schedule />
     </main>
   );
 }
