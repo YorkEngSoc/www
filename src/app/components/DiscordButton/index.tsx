@@ -8,7 +8,7 @@ type DiscordButtonT = {
 export default function DiscordButton({ tw }: DiscordButtonT) {
   return (
     <LinkButton
-      href="https://discord.gg/993j4AxpVB"
+      href="/discord"
       tw={`discord-button ${tw ?? ""}`}
       target="_blank"
       referrerPolicy="no-referrer"

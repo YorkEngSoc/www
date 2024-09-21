@@ -53,7 +53,7 @@ export default function Footer() {
           />
         </LinkButton>
         <LinkButton
-          href="https://www.linkedin.com/company/yorkengsoc/"
+          href="/linkedin"
           target="_blank"
           referrerPolicy="no-referrer"
           tw="aspect-square h-max inline-block p-1 md:p-2 bg-white hover:scale-100 hover:translate-y-0">

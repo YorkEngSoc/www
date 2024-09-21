@@ -50,6 +50,18 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/linkedin",
+        destination: "https://www.linkedin.com/company/yorkengsoc/",
+        basePath: false,
+        permanent: true,
+      },
+      {
+        source: "/yorksu",
+        destination: "https://yusu.org/activities/view/28",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
