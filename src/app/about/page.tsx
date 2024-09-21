@@ -1,7 +1,9 @@
-import { createClient } from "@supabase/supabase-js";
 import { Metadata } from "next";
-import Committee, { CommitteeMemberT } from "../pageFragments/Committee";
-import AboutBase from "./base";
+import AboutImages from "@components/AboutImages";
+import AnimatedLinkButton from "@components/AnimatedLinkButton";
+import SectionTitle from "@components/SectionTitle";
+import Image from "next/image";
+import header from "./assets/header.svg";
 
 export const metadata: Metadata = {
   title: "YES | About",
@@ -9,43 +11,26 @@ export const metadata: Metadata = {
 };
 
 export default async function About() {
-  try {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+  return (
+    <main>
+      <Image src={header} alt="Sci-Fi artwork" className="mx-auto" />
+      <SectionTitle title="About Us" tw="pt-6" />
+      <p className="text-xl sm:text-3xl lg:text-4xl px-2 lg:px-10 pt-2 text-white">
+        Ever since we were founded, we have been empowering our members to drive
+        innovation, shape the future, and excel in their careers by fostering a
+        dynamic community of learning, mentorship and transformative
+        experiences. Many of our alumni have gone on to have very successful
+        international careers.
+      </p>
+      <AboutImages />
 
-    const { data: committee } = (await supabase
-      .from("committee")
-      .select()
-      .order("id")) as {
-      data: CommitteeMemberT[] | null;
-    };
-
-    if (committee && committee.length > 0) {
-      for (const idx in committee) {
-        const member = committee[idx];
-        const { data } = supabase.storage
-          .from("committee")
-          .getPublicUrl(member.image);
-
-        if (data && data.publicUrl) member.image = data.publicUrl;
-      }
-
-      return (
-        <AboutBase>
-          <Committee data={committee} />
-        </AboutBase>
-      );
-    } else {
-      throw new Error("Committee array is empty");
-    }
-  } catch (e) {
-    console.error(e);
-    return (
-      <AboutBase>
-        <Committee loading={true} />
-      </AboutBase>
-    );
-  }
+      <div className="w-max mx-auto py-16">
+        <AnimatedLinkButton
+          text="Visit our YUSU page"
+          href="/yorksu"
+          newtab={true}
+        />
+      </div>
+    </main>
+  );
 }
