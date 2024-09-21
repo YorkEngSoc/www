@@ -4,6 +4,7 @@ import Hero from "./pageFragments/Hero";
 import Join from "./pageFragments/Join";
 import Members from "./pageFragments/Members";
 import Mission from "./pageFragments/Mission";
+import Schedule from "./pageFragments/Schedule";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <Mission />
       <Events />
+      <Schedule />
       <Members />
       <Join />
       <Contact />

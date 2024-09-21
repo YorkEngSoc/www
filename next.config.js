@@ -4,12 +4,6 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    remotePatterns: [
-      {
-        hostname: "jinoafndjdcrghrvtslx.supabase.co",
-        protocol: "https",
-      },
-    ],
   },
   async redirects() {
     return [
@@ -29,6 +23,36 @@ const nextConfig = {
       {
         source: "/join",
         destination: "https://forms.gle/wrYqp8s67dr9Mf8c9",
+        basePath: false,
+        permanent: true,
+      },
+      {
+        source: "/discord",
+        destination: "https://discord.gg/nu66PUUs7N",
+        basePath: false,
+        permanent: true,
+      },
+      {
+        source: "/instagram",
+        destination: "https://www.instagram.com/yorkengsoc",
+        basePath: false,
+        permanent: true,
+      },
+      {
+        source: "/github",
+        destination: "https://github.com/YorkEngSoc",
+        basePath: false,
+        permanent: true,
+      },
+      {
+        source: "/linkedin",
+        destination: "https://www.linkedin.com/company/yorkengsoc/",
+        basePath: false,
+        permanent: true,
+      },
+      {
+        source: "/yorksu",
+        destination: "https://yusu.org/activities/view/28",
         basePath: false,
         permanent: true,
       },

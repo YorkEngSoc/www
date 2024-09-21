@@ -25,7 +25,7 @@ export default function Join() {
           I&rsquo;m an engineer
         </LinkButton>
         <LinkButton
-          href="https://yorksu.org/activities/view/28"
+          href="/yorksu"
           tw="w-2/3 text-center md:ml-10 md:w-auto"
           target="_blank"
           referrerPolicy="no-referrer">
