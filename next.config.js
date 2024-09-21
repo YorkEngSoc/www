@@ -32,6 +32,12 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/discord",
+        destination: "https://discord.gg/nu66PUUs7N",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
