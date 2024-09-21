@@ -38,6 +38,12 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/instagram",
+        destination: "https://www.instagram.com/yorkengsoc/",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
