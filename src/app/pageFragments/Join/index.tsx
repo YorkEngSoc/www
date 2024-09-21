@@ -18,7 +18,7 @@ export default function Join() {
       <div className="flex flex-col items-center md:flex-row justify-between md:mx-auto pt-10 gap-4 md:gap-0">
         <DiscordButton tw="md:mr-10 w-2/3 md:w-auto" />
         <LinkButton
-          href="join"
+          href="/join"
           tw="w-2/3 text-center md:w-auto"
           target="_blank"
           referrerPolicy="no-referrer">

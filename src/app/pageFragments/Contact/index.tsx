@@ -12,10 +12,9 @@ export default function Contact() {
             any partnerships.<br></br>
             <br></br>
             <Link
-              href="mailto:engsoc@yusu.org"
-              className="text-dodger-blue-500 font-extrabold"
-            >
-              engsoc@yusu.org
+              href="mailto:engsoc@yorksu.org"
+              className="text-dodger-blue-500 font-extrabold">
+              engsoc@yorksu.org
             </Link>
           </p>
           <p className="my-auto pt-4 lg:pt-2 xl:pt-0 text-xl sm:text-3xl lg:text-4xl xl:text-5xl">
@@ -34,8 +33,7 @@ export default function Contact() {
           className="border-0 mx-auto my-auto lg:w-1/2 w-2/3 aspect-square pt-4 md:pt-0"
           allowFullScreen
           loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+          referrerPolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   );
