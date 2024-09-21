@@ -40,7 +40,13 @@ const nextConfig = {
       },
       {
         source: "/instagram",
-        destination: "https://www.instagram.com/yorkengsoc/",
+        destination: "https://www.instagram.com/yorkengsoc",
+        basePath: false,
+        permanent: true,
+      },
+      {
+        source: "/github",
+        destination: "https://github.com/YorkEngSoc",
         basePath: false,
         permanent: true,
       },

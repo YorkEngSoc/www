@@ -23,8 +23,7 @@ export default function Footer() {
             href="https://barillari.me"
             className="text-blue-500 hover:line-through"
             referrerPolicy="no-referrer"
-            target="_blank"
-          >
+            target="_blank">
             @Giuseppe Barillari
           </Link>
         </span>
@@ -32,11 +31,10 @@ export default function Footer() {
       <div className="flex flex-row pt-2 md:pt-0 w-full md:w-auto justify-between md:justify-normal">
         <DiscordButton tw="inline-block w-1/2 md:w-max mr-4 hover:scale-100 hover:translate-y-0 p-1 md:p-2" />
         <LinkButton
-          href="https://instagram.com/yorkengsoc"
+          href="/instagram"
           target="_blank"
           referrerPolicy="no-referrer"
-          tw="aspect-square inline-block p-1 md:p-2 mr-4 bg-white hover:scale-100 hover:translate-y-0"
-        >
+          tw="aspect-square inline-block p-1 md:p-2 mr-4 bg-white hover:scale-100 hover:translate-y-0">
           <Image
             src={instagram}
             alt="Instagram logo."
@@ -44,11 +42,10 @@ export default function Footer() {
           />
         </LinkButton>
         <LinkButton
-          href="https://github.com/YorkEngSoc"
+          href="/github"
           target="_blank"
           referrerPolicy="no-referrer"
-          tw="aspect-square h-max inline-block p-1 md:p-2 mr-4 bg-white hover:scale-100 hover:translate-y-0"
-        >
+          tw="aspect-square h-max inline-block p-1 md:p-2 mr-4 bg-white hover:scale-100 hover:translate-y-0">
           <Image
             src={github}
             alt="Github logo."
@@ -59,8 +56,7 @@ export default function Footer() {
           href="https://www.linkedin.com/company/yorkengsoc/"
           target="_blank"
           referrerPolicy="no-referrer"
-          tw="aspect-square h-max inline-block p-1 md:p-2 bg-white hover:scale-100 hover:translate-y-0"
-        >
+          tw="aspect-square h-max inline-block p-1 md:p-2 bg-white hover:scale-100 hover:translate-y-0">
           <Image
             src={linkedin}
             alt="Linkedin logo."
