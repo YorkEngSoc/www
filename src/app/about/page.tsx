@@ -26,7 +26,7 @@ export default async function About() {
 
       <div className="w-max mx-auto py-16">
         <AnimatedLinkButton
-          text="Visit our YUSU page"
+          text="Visit our YorkSU page"
           href="/yorksu"
           newtab={true}
         />

@@ -52,7 +52,7 @@ const nextConfig = {
       },
       {
         source: "/yorksu",
-        destination: "https://yusu.org/activities/view/28",
+        destination: "https://yorksu.org/activities/view/28",
         basePath: false,
         permanent: true,
       },
