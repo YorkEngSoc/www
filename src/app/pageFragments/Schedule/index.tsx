@@ -10,8 +10,8 @@ export default function Schedule() {
           <p className="text-xl sm:text-3xl lg:text-4xl">
             Check out what we are up to.
             <br />
-            Make sure to select "Add to Calendar" or the blue "+" button to add
-            the events to your calendar.
+            Make sure to select &quot;Add to Calendar&quot; or the blue
+            &quot;+&quot; button to add the events to your calendar.
             <br /> <br />
             We look forward to seeing you there!
           </p>
