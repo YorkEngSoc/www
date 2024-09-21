@@ -24,8 +24,8 @@ export default function AboutBase({ children }: AboutBaseT) {
       {children}
       <div className="w-max mx-auto py-16">
         <AnimatedLinkButton
-          text="Visit our YUSU page"
-          href="https://yusu.org/activities/view/28"
+          text="Visit our YorkSU page"
+          href="https://yorksu.org/activities/view/28"
           newtab={true}
         />
       </div>

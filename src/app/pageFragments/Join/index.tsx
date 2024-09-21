@@ -18,19 +18,17 @@ export default function Join() {
       <div className="flex flex-col items-center md:flex-row justify-between md:mx-auto pt-10 gap-4 md:gap-0">
         <DiscordButton tw="md:mr-10 w-2/3 md:w-auto" />
         <LinkButton
-          href="https://forms.gle/Pxr2mvSp8kNeJnJu6"
+          href="/join"
           tw="w-2/3 text-center md:w-auto"
           target="_blank"
-          referrerPolicy="no-referrer"
-        >
+          referrerPolicy="no-referrer">
           I&rsquo;m an engineer
         </LinkButton>
         <LinkButton
-          href="https://yusu.org/activities/view/28"
+          href="https://yorksu.org/activities/view/28"
           tw="w-2/3 text-center md:ml-10 md:w-auto"
           target="_blank"
-          referrerPolicy="no-referrer"
-        >
+          referrerPolicy="no-referrer">
           All other students
         </LinkButton>
       </div>
