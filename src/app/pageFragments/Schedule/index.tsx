@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Schedule() {
   return (
     <div className="pb-10">
-      <SectionTitle title="Schdule" />
+      <SectionTitle title="Schedule" />
       <div className="grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1">
         <div className="flex flex-col pt-4 text-white px-2 lg:pl-10 md:pr-0">
           <p className="text-xl sm:text-3xl lg:text-4xl">
