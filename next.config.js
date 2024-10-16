@@ -56,6 +56,12 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/pcb",
+        destination: "https://github.com/YorkEngSoc/intro-to-kicad",
+        basePath: false,
+        permanent: true,
+      }.
     ];
   },
 };
