@@ -61,7 +61,7 @@ const nextConfig = {
         destination: "https://github.com/YorkEngSoc/intro-to-kicad",
         basePath: false,
         permanent: true,
-      }.
+      },
     ];
   },
 };
