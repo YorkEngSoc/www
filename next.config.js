@@ -62,6 +62,12 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/winter-formal-menu",
+        destination: "https://forms.gle/bh8RJk7aa5YpZW3v8",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
