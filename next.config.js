@@ -16,7 +16,7 @@ const nextConfig = {
       },
       {
         source: "/winter-formal",
-        destination: "https://forms.gle/Re18uLHvQtgnHdEb8",
+        destination: "https://yorksu.org/events/id/4048-engineering-winter-formal",
         basePath: false,
         permanent: true,
       },
