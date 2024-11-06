@@ -68,6 +68,12 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/sumo-intro",
+        destination: "https://docs.google.com/presentation/d/13D1xi-6d-WKjCjCSprtQm-3S46CodV8iwA-wrJE1CEc/edit?usp=sharing",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
