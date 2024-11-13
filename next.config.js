@@ -16,7 +16,8 @@ const nextConfig = {
       },
       {
         source: "/winter-formal",
-        destination: "https://yorksu.org/events/id/4048-engineering-winter-formal",
+        destination:
+          "https://yorksu.org/events/id/4048-engineering-winter-formal",
         basePath: false,
         permanent: true,
       },
@@ -70,7 +71,22 @@ const nextConfig = {
       },
       {
         source: "/sumo-intro",
-        destination: "https://docs.google.com/presentation/d/13D1xi-6d-WKjCjCSprtQm-3S46CodV8iwA-wrJE1CEc/edit?usp=sharing",
+        destination:
+          "https://docs.google.com/presentation/d/13D1xi-6d-WKjCjCSprtQm-3S46CodV8iwA-wrJE1CEc/edit?usp=sharing",
+        basePath: false,
+        permanent: true,
+      },
+      {
+        source: "/game-boy",
+        destination:
+          "https://docs.google.com/presentation/d/1JywvYww4u2e2BVhYYribAesN5vmhVgK349OLRW2jgyk/edit?usp=sharing",
+        basePath: false,
+        permanent: true,
+      },
+      {
+        source: "/gameboy",
+        destination:
+          "https://docs.google.com/presentation/d/1JywvYww4u2e2BVhYYribAesN5vmhVgK349OLRW2jgyk/edit?usp=sharing",
         basePath: false,
         permanent: true,
       },
