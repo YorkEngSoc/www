@@ -90,6 +90,13 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/smt-intro",
+        destination:
+          "https://docs.google.com/presentation/d/1lRqQI8qVBzh3IBdXtIr-JHqUU8h1wDHI0Gn-0hxLB4M/edit?usp=sharing",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
