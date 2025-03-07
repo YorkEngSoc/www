@@ -97,6 +97,13 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/bands",
+        destination:
+          "https://forms.gle/EGgkyVNQo4ipPzWr6",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
