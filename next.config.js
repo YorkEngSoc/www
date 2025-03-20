@@ -100,7 +100,7 @@ const nextConfig = {
       {
         source: "/bands",
         destination:
-          "https://forms.gle/EGgkyVNQo4ipPzWr6",
+          "https://forms.gle/BDZgMBiR6UwjLwQFA",
         basePath: false,
         permanent: true,
       },
