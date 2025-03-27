@@ -104,6 +104,13 @@ const nextConfig = {
         basePath: false,
         permanent: true,
       },
+      {
+        source: "/qfactor",
+        destination:
+          "https://forms.gle/yqMa7sFXtmo9NU5p7",
+        basePath: false,
+        permanent: true,
+      },
     ];
   },
 };
